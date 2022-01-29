@@ -1,6 +1,4 @@
 const Contenedor = require('./clase');
-const fs = require('fs');
-const { title } = require('process');
 
 const newProduct = new Contenedor ('./productos.txt');
 
