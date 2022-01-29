@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "title": "Pizza",
+    "price": "$600",
+    "thumbnail": "wwww.google.com/images/pizza",
+    "id": 1
+  },
+  {
+    "title": "Empanda",
+    "price": "$120",
+    "thumbnail": "wwww.google.com/images/empanada",
+    "id": 2
+  },
+  {
+    "title": "Faina",
+    "price": "$50",
+    "thumbnail": "wwww.google.com/images/faina",
+    "id": 3
+  }
+]

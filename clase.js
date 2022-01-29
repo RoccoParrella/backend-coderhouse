@@ -26,9 +26,8 @@ class Contenedor {
     getById(id) {
         const data = fs.readFileSync(this.filePath, 'utf8')
         let newData = JSON.parse(data);
-        console.log(newData.filter(e => e.id === id));
-
-        return data;
+        let element = newData.filter(e => e.id === id)
+        return element;
     }
 
     getAll() {
@@ -38,9 +37,9 @@ class Contenedor {
                 console.log("No hay ningun objeto, solo un array vacio!");
             } else {
                 let newData = JSON.parse(data);
-                console.log(newData);
+                return newData;
             }
-            return data;
+            
         } catch (err) {
             throw err;
         }
