@@ -6,18 +6,15 @@ class Contenedor {
         this.array = []
     }
 
-    save = (obj) => {
+    save(obj) {
         try {
             const data = fs.readFileSync(this.filePath, 'utf8');
             let array = this.array;
             let newId = array.length + 1;
             obj.id = newId;
             console.log(`A la ${obj.title} se le asocio el id N${obj.id}`);
-
             array.push(obj);
             fs.writeFileSync(this.filePath, JSON.stringify(array, null, 2));
-
-            return data;
         } catch (err) {
             throw err;
         }
