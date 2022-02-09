@@ -51,7 +51,7 @@ router.get('/api/productos/:id', (req, res) => {
     if (producto.length == 0) {
         res.status(404).send({
             error: "producto no encontrado"
-        })
+        })  
     } else {
         res.status(200).send(producto)
     }
@@ -71,7 +71,7 @@ router.put('/api/productos/:id', (req, res) => {
     const id = parseInt(req.params.id)
     newProduct.deleteById(id)
     newProduct.save({title: req.body.title, price: req.body.price, thumbnail: req.body.thumbnail, id: id})
-    res.status(200).send(`Se ha modificado el producto ${req.body.title}`)
+    res.status(201).send(`Se ha modificado el producto correctamente`)
 })
 
 // Borrar todos los productos
