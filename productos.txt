@@ -1,20 +1,20 @@
 [
   {
-    "title": "Pizza",
-    "price": "$600",
-    "thumbnail": "wwww.google.com/images/pizza",
+    "title": "1",
+    "price": "203330",
+    "thumbnail": "hola",
     "id": 1
   },
   {
-    "title": "Empanda",
-    "price": "$120",
-    "thumbnail": "wwww.google.com/images/empanada",
-    "id": 2
+    "title": "3",
+    "price": "203330",
+    "thumbnail": "hola",
+    "id": 3
   },
   {
-    "title": "Faina",
-    "price": "$50",
-    "thumbnail": "wwww.google.com/images/faina",
-    "id": 3
+    "title": "4",
+    "price": "203330",
+    "thumbnail": "hola",
+    "id": 4
   }
 ]

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="./css/form.css">
+</head>
+<body>
+    <main>
+        <div>
+            <p class="title">Agregue productos!</p>
+        </div>
+        <form action="/productos" enctype="multipart/form-data" method="post">
+            <div class="form-1">
+                <label for="producto">Producto </label>
+                <input name="producto">
+            </div>
+            <div class="form-2">
+                <label for="precio">Precio </label>
+                <input name="precio">
+            </div>
+            <div class="form-3">
+                <label for="img">Imagen </label>
+                <input type="file" name="img">
+            </div>
+            <div>
+                <button class="boton" type="submit">Enviar</button>
+            </div>
+        </form>
+        <div>
+            <a href="/">Volver</a>
+        </div>
+    </main>
+</body>
+</html>

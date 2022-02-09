@@ -3,27 +3,43 @@ const fs = require('fs');
 class Contenedor {
     constructor(filePath) {
         this.filePath = filePath;
-        this.array = []
     }
 
     save(obj) {
         try {
-            const data = fs.readFileSync(this.filePath, 'utf8');
-            let array = this.array;
-            let newId = array.length + 1;
-            obj.id = newId;
-            console.log(`A la ${obj.title} se le asocio el id N${obj.id}`);
-            array.push(obj);
-            fs.writeFileSync(this.filePath, JSON.stringify(array, null, 2));
+            if(this.arrayLenght() == 0) {
+                let array = [];
+                obj.id = 1;
+                console.log(`A la ${obj.title} se le asocio el id N${obj.id}`);
+                array.push(obj);
+                fs.writeFileSync(this.filePath, JSON.stringify(array, null, 2));
+            } else {
+                let data = fs.readFileSync(this.filePath, 'utf8')
+                let array = JSON.parse(data);
+                let newId = array.length + 1;
+                !obj.id ? obj.id = newId : null
+                let arrayOrdenado = array.sort(function(a, b) { return a.id-b.id });
+                arrayOrdenado.push(obj);
+                fs.writeFileSync(this.filePath, JSON.stringify(array, null, 2));
+            }
         } catch (err) {
             throw err;
         }
     }
 
-    getById(id) {
+    arrayLenght() {
         const data = fs.readFileSync(this.filePath, 'utf8')
         let newData = JSON.parse(data);
-        let element = newData.filter(e => e.id === id)
+        let length = newData.length;
+        return length;
+    }
+
+    getById(id) {
+
+        
+        const data = fs.readFileSync(this.filePath, 'utf8')
+        let newData = JSON.parse(data);
+        let element = newData.filter(e => e.id == id)
         return element;
     }
 
@@ -45,7 +61,7 @@ class Contenedor {
     deleteById(id) {
         const data = fs.readFileSync(this.filePath, 'utf8')
         let newData = JSON.parse(data);
-        let result = newData.filter((item) => item.id !== id);
+        let result = newData.filter((item) => item.id != id);
         fs.writeFileSync(this.filePath, JSON.stringify(result, null, 2))
     }
 

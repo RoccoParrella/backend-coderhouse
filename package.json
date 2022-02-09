@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/RoccoParrella/backend-coderhouse#readme",
   "dependencies": {
     "express": "^4.17.2",
+    "multer": "^1.4.4",
     "nodemon": "^2.0.15"
   }
 }
