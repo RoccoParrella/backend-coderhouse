@@ -2,8 +2,8 @@ const multer = require('multer')
 const path = require("path");
 const express = require('express');
 const { Router } = express;
-const Contenedor = require('../clase');
-const newProduct = new Contenedor('./productos.txt');
+const Contenedor = require('../models/clase');
+const newProduct = new Contenedor('./database/productos.txt');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

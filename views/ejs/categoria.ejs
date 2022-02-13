@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+    <title>Netflix | <%- pelicula.toUpperCase() %></title>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+    <main>
+        <div class="contenedor-peliculas">
+            <h2 class="h2-peliculas"><%- pelicula.toUpperCase() %></h2>
+            <ul class="ul-peliculas">
+                <% peliculas.forEach(function(movie) { %> 
+                    <li class="li-peliculas"><img class="foto-peliculas" src="<%= movie.urlImg %>"><p class="p-peliculas"><%= movie.title %></p><p class="p-duration"><%= movie.duration %></p></li>
+                <% }) %>
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>

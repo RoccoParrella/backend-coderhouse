@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+    <title>Netflix | Inicio</title>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+    <main>
+        <div class="contenedor">
+            <p class="title">Bienvenido a <span>NETFLIX</span></p>
+        </div>
+        <div class="contenedor-peliculas">
+            <h2 class="h2-peliculas">PELICULAS</h2>
+            <ul class="ul-peliculas">
+                <% peliculas.forEach(function(movie) { %> 
+                    <li class="li-peliculas"><img class="foto-peliculas" src="<%= movie.urlImg %>"><p class="p-peliculas"><%= movie.title %></p><p class="p-duration"><%= movie.duration %></p></li>
+                <% }) %>
+            </ul>
+            <h2 class="h2-peliculas">SERIES</h2>
+            <ul class="ul-peliculas">
+                <% series.forEach(function(movie) { %> 
+                    <li class="li-peliculas"><img class="foto-peliculas" src="<%= movie.urlImg %>"><p class="p-peliculas"><%= movie.title %></p><p class="p-duration"><%= movie.duration %></p></li>
+                <% }) %>
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>

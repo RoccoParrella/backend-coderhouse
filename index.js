@@ -1,17 +1,18 @@
-const Contenedor = require('./clase');
-const newProduct = new Contenedor('./productos.txt');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+const engine = require('./engines/engine');
+const ejsRouter = require('./routes/ejs');
+
+const motor = "ejs";
+engine(app, motor);
+
 app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-const productosRouter = require("./routes/home");
 
-app.use('/', productosRouter);
-app.use('/productos', productosRouter);
-
+app.use(`/${motor}`, ejsRouter);
 
 const server = app.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}!`);
