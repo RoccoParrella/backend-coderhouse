@@ -1,0 +1,12 @@
+extends ./layout/base.pug
+block content 
+
+    main
+        div(class="contenedor-peliculas")
+            h2(class="h2-peliculas")= pelicula
+            ul(class="ul-peliculas")
+                each pelicula in peliculas
+                    li(class="li-peliculas")
+                        img(class="foto-peliculas", src=pelicula.urlImg, alt="")
+                        p(class="p-peliculas")= pelicula.title
+                        p(class="p-duration")= pelicula.duration

@@ -1,0 +1,24 @@
+extends ./layout/base.pug
+block content 
+
+    main 
+        div(class="contenedor")
+            div
+                p(class="title") Agregue una pelicula o serie 
+            form(action="/pug/add", enctype="multipart/form-data", method="post")
+                div(class="form-label")
+                    label(for="titulo") Titulo
+                    input(name="titulo")
+                div(class="form-label")
+                    label(for="tipo") Tipo
+                    select(name="tipo")
+                        option(value="peliculas") Pelicula
+                        option(value="series") Serie
+                div(class="form-label")
+                    label(for="duracion") Duracion
+                    input(name="duracion")
+                div(class="form-label")
+                    label(for="img") Imagen(URL)
+                    input(name="img")
+                div
+                    button(class="boton" ,type="submit") Enviar

@@ -1,0 +1,23 @@
+extends ./layout/base.pug
+block content 
+
+    main
+        div(class="contenedor")
+            p(class="title") Bienvenido a 
+                span Netflix
+        div(class="contenedor-peliculas")
+            h2(class="h2-peliculas") PELICULAS
+            ul(class="ul-peliculas")
+                each pelicula in peliculas
+                    li(class="li-peliculas")
+                        img(class="foto-peliculas", src=pelicula.urlImg, alt="")
+                        p(class="p-peliculas")= pelicula.title
+                        p(class="p-duration")= pelicula.duration
+        div(class="contenedor-peliculas")
+            h2(class="h2-peliculas") SERIES
+            ul(class="ul-peliculas")
+                each serie in series
+                    li(class="li-peliculas")
+                        img(class="foto-peliculas", src=serie.urlImg, alt="")
+                        p(class="p-peliculas")= serie.title
+                        p(class="p-duration")= serie.duration

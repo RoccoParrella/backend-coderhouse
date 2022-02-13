@@ -1,4 +1,4 @@
-module.exports = function (app, engine) {
-    app.set('views', './views/ejs')
-    app.set('view engine', `${engine}`);
+module.exports = function (app, motor) {
+    app.set('views', `./views/${motor}`);
+    app.set('view engine', `${motor}`);
 }
