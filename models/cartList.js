@@ -38,6 +38,9 @@ class CartList {
         let data = fs.readFileSync(this.filePath, 'utf8')
         let newData = JSON.parse(data);
         let result = newData.filter((item) => item.id == id);
+        let productId = result[0].products.length + 1;
+        product.id = productId;
+        product.time = moment().format("h:mm:ss");
         result[0].products.push(product);
         fs.writeFileSync(this.filePath, JSON.stringify(newData, null, 2))
     }
