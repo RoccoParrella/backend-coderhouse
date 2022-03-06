@@ -7,8 +7,8 @@ module.exports = {
         res.send(result[0].products);
     },
     createCart: (req, res) => {
-        cart.createCart()
-        res.sendStatus(200)
+        let id = cart.createCart()
+        res.status(200).send(`Carrito creado con id: ${id}`);
     },
     deleteCart: (req, res) => {
         cart.deleteCart(req.params.id)

@@ -17,7 +17,7 @@ class CartList {
         }
         array.push(cart);
         fs.writeFileSync(this.filePath, JSON.stringify(array, null, 2));
-        console.log(`Se creo el carrito N${cart.id}`);
+        return cart.id;
     }
 
     getAll(id) {
