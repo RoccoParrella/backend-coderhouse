@@ -17,12 +17,11 @@ const upload = multer({ storage: storage })
 const router = new Router();
 
 router.get('/', (req, res) => {
-    const peliculas = newProduct.getAll("peliculas");
-    const series = newProduct.getAll("series");
-    if (peliculas.length < 0) {
+    const data = newProduct.getAll();
+    if (data.length < 0) {
         res.status(200).render('index');
     } else {
-        res.status(200).render('index', { peliculas, series });
+        res.status(200).render('index', { data });
     }
 })
 

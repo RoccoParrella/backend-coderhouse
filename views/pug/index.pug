@@ -6,18 +6,11 @@ block content
             p(class="title") Bienvenido a 
                 span Netflix
         div(class="contenedor-peliculas")
-            h2(class="h2-peliculas") PELICULAS
+            h2(class="h2-peliculas") PELICULAS y SERIES
             ul(class="ul-peliculas")
-                each pelicula in peliculas
+                each pelicula in data
                     li(class="li-peliculas")
                         img(class="foto-peliculas", src=pelicula.urlImg, alt="")
                         p(class="p-peliculas")= pelicula.title
                         p(class="p-duration")= pelicula.duration
         div(class="contenedor-peliculas")
-            h2(class="h2-peliculas") SERIES
-            ul(class="ul-peliculas")
-                each serie in series
-                    li(class="li-peliculas")
-                        img(class="foto-peliculas", src=serie.urlImg, alt="")
-                        p(class="p-peliculas")= serie.title
-                        p(class="p-duration")= serie.duration

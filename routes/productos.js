@@ -10,7 +10,7 @@ router.get('/productos', productos.getProducts);
 
 // Trae un producto en especifico
 
-router.get('/productos/:id', productos.getProducts);
+router.get('/productos/:id', productos.getProductById);
 
 // Agrega un nuevo producto
 
@@ -24,5 +24,8 @@ router.put('/productos/:id', productos.editProduct);
 
 router.delete('/productos/:id', productos.deleteProduct);
 
+// Ruta no encontrada
+
+router.get('/productos/*', productos.notFound)
 
 module.exports = router;
