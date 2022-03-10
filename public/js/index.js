@@ -71,9 +71,9 @@ const renderPelis = (data) => {
     data.forEach(e => {
         const divMsg = document.createElement('div');
         divMsg.classList.add('peliculas-form');
-        const p_titulo = `<p class="pelicula-titulo">${e.titulo}</p>`
-        const p_duracion = `<p class="pelicula-duracion">${e.duracion}</p>`
-        const p_img = `<img class="pelicula-img" src="${e.img}">`
+        const p_titulo = `<p class="pelicula-titulo">${e.title}</p>`
+        const p_duracion = `<p class="pelicula-duracion">${e.duration}</p>`
+        const p_img = `<img class="pelicula-img" src="${e.urlImg}">`
         divMsg.innerHTML = p_titulo + p_duracion + p_img;
         console.log(divMsg);
         pelisDiv.appendChild(divMsg);
