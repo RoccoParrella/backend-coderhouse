@@ -2,23 +2,50 @@ extends ./layout/base.pug
 block content 
 
     main 
-        div(class="contenedor")
-            div
+        div(class="main-form")
+            div(class="contenedor margin-top")
                 p(class="title") Agregue una pelicula o serie 
-            form(action="/pug/add", enctype="multipart/form-data", method="post")
-                div(class="form-label")
-                    label(for="titulo") Titulo
-                    input(name="titulo")
-                div(class="form-label")
-                    label(for="tipo") Tipo
-                    select(name="tipo")
-                        option(value="peliculas") Pelicula
-                        option(value="series") Serie
-                div(class="form-label")
-                    label(for="duracion") Duracion
-                    input(name="duracion")
-                div(class="form-label")
-                    label(for="img") Imagen(URL)
-                    input(name="img")
-                div
-                    button(class="boton" ,type="submit") Enviar
+                form(action="/pug/add", enctype="multipart/form-data", method="post")
+                    div(class="form-label")
+                        label(for="titulo") Titulo
+                        input(id="titulo" ,name="titulo")
+                    div(class="form-label")
+                        label(for="tipo") Tipo
+                        select(id="tipo",name="tipo")
+                            option(value="peliculas") Pelicula
+                            option(value="series") Serie
+                    div(class="form-label")
+                        label(for="duracion") Duracion
+                        input(id="duracion",name="duracion")
+                    div(class="form-label")
+                        label(for="img") Imagen(URL)
+                        input(id="img",name="img")
+                    div
+                        button(id="enviar-pelis", class="boton",type="submit") Enviar
+            div(class="contenedor margin-top")
+                h2(class="title") Lista de contenido 
+                div(class="linea")
+                h2(class="h2 title", id="nadaPelis") NO HAY PELICULAS
+                div(class="d-flex justify-content-around", id="a")
+                    p(class="pelicula-t hidden" id="hidden-uno") Titulo
+                    p(class="pelicula-d hidden" id="hidden-dos") Duracion
+                    p(class="pelicula-m hidden" id="hidden-tres") Miniatura
+                div(class="peliculas-div" id="divPelis")
+                div(class="linea")
+            div(class="contenedor margin-top")
+                h2(class="title") Centro de mensajes
+                div(class="linea")
+                h2(class="h2 title", id="nada") NO HAY MENSAJES
+                div(class="mensajes" id="divMensajes")
+                div(class="linea")
+                form(class="form-emails")
+                    div(class="form-div")
+                        div(class="form-label")
+                            input(class="input-emails", id="email", name="autor", class="mensaje-email", placeholder="Ingrese su email")
+                        div(class="form-label")
+                            input(class="input-emails", id="mensaje", name="mensaje", class="mensaje-emails", placeholder="Ingrese un mensaje")
+                    div
+                        button(class="boton", id="boton-mail", type="submit") Enviar
+
+    script(src="/socket.io/socket.io.js")
+    script(src="/static/js/index.js")

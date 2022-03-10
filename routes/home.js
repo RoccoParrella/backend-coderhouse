@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 router.get(`/buscar`, (req, res) => {
     const pelicula = req.query.categoria;
     const peliculas = newProduct.getAll(pelicula);
-    res.status(200).render('category', { peliculas, pelicula } );
+    res.status(200).render('category', { peliculas, pelicula });
 })
 
 router.get('/add', (req, res) => {

@@ -1,31 +1,31 @@
-const { Router } = require("express");
-const productos = require ('../controllers/productos');
-const router = new Router();
+// const { Router } = require("express");
+// const productos = require ('../controllers/productos');
+// const router = new Router();
 
-// API
+// // API
 
-// Traer todos los productos 
+// // Traer todos los productos 
 
-router.get('/productos', productos.getProducts);
+// router.get('/productos', productos.getProducts);
 
-// Trae un producto en especifico
+// // Trae un producto en especifico
 
-router.get('/productos/:id', productos.getProductById);
+// router.get('/productos/:id', productos.getProductById);
 
-// Agrega un nuevo producto
+// // Agrega un nuevo producto
 
-router.post('/productos', productos.addProduct);
+// router.post('/productos', productos.addProduct);
 
-// Modifica un producto por id
+// // Modifica un producto por id
 
-router.put('/productos/:id', productos.editProduct);
+// router.put('/productos/:id', productos.editProduct);
 
-// Borrar un producto por id
+// // Borrar un producto por id
 
-router.delete('/productos/:id', productos.deleteProduct);
+// router.delete('/productos/:id', productos.deleteProduct);
 
-// Ruta no encontrada
+// // Ruta no encontrada
 
-router.get('/productos/*', productos.notFound)
+// router.get('/productos/*', productos.notFound)
 
-module.exports = router;
+// module.exports = router;

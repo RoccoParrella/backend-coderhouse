@@ -5,6 +5,10 @@ class Contenedor {
         this.filePath = filePath;
     }
 
+    saveMsg(obj) {
+        fs.writeFileSync(this.filePath, JSON.stringify(obj, null, 2));
+    }
+
     save(obj) {
         try {
             if (this.arrayLength() == 0) {
