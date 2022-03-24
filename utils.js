@@ -1,5 +1,3 @@
-
-
 (async () => {
 
     const movie = require(`./models/movieSql`);

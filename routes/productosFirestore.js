@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const productos = require ('../controllers/productos');
+const productos = require ('../controllers/productosFirestore');
 const router = new Router();
 
 // API
@@ -8,13 +8,13 @@ const router = new Router();
 
 router.get('/productos', productos.getProducts);
 
-// Ruta no encontrada
-
-router.get('/*', productos.notFound)
-
 // Trae un producto en especifico
 
 router.get('/productos/:id', productos.getProductById);
+
+// Ruta no encontrada
+
+router.get('/*', productos.notFound)
 
 // Agrega un nuevo producto
 

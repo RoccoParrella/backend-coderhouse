@@ -1,93 +1,72 @@
-// const res = require('express/lib/response');
-// const fs = require('fs');
-// const moment = require('moment');
+const mongoose = require('mongoose');
+const moment = require('moment');
 
-// class CartList {
-//     constructor(filePath) {
-//         this.filePath = filePath;
-//     }
+class CartList {
+    constructor() {
+        const schemma = new mongoose.Schema({
+            products: Array,
+            timestamp: { type: Date, default: Date.now },
+            id: Number,
+        });
 
-//     createCart(obj) {
-//         let data = fs.readFileSync(this.filePath, 'utf8')
-//         let array = JSON.parse(data);
-//         let product = [];
-//         obj.title !== undefined ? product.push(obj) : null;
-//         let newId = this.newId();
-//         let cart = {
-//             id: newId,
-//             time: moment().format("h:mm:ss"),
-//             products: product
-//         }
-//         array.push(cart);
-//         fs.writeFileSync(this.filePath, JSON.stringify(array, null, 2));
-//         return cart.id;
-//     }
+        this.model = mongoose.model('carrito', schemma);
+    }
 
-//     getAll(id) {
-//         let exist = this.cartExist(id);
-//         if (exist) {
-//             let data = fs.readFileSync(this.filePath, 'utf8');
-//             let newData = JSON.parse(data);
-//             let result = newData.filter((item) => item.id == id);
-//             let array = result[0].products;
-//             return array;
-//         }
-//         return false;
-//     }
+    async createCart(obj) {
+        let product = [];
+        obj.id = 1;
+        obj.time = moment().format("h:mm:ss");
+        obj.title !== undefined ? product.push(obj) : null;
+        let newId = await this.newId();
+        let cartObj = await this.model.create({ id: newId, products: product });
+        return cartObj;
+    }
 
-//     deleteCart(id) {
-//         let data = fs.readFileSync(this.filePath, 'utf8')
-//         let newData = JSON.parse(data);
-//         let result = newData.filter((item) => item.id != id);
-//         fs.writeFileSync(this.filePath, JSON.stringify(result, null, 2))
-//     }
+    async getAll(id) {
+        let data = await this.model.find({ id: id });
+        if (data.length !== 0) {
+            let array = data[0].products;
+            return array;
+        }
+        return false;
+    }
 
-//     addProduct(id, product) {
-//         let data = fs.readFileSync(this.filePath, 'utf8')
-//         let newData = JSON.parse(data);
-//         let result = newData.filter((item) => item.id == id);
-//         let productId = result[0].products.length + 1;
-//         product.id = productId;
-//         product.time = moment().format("h:mm:ss");
-//         result[0].products.push(product);
-//         fs.writeFileSync(this.filePath, JSON.stringify(newData, null, 2))
-//     }
+    async deleteCart(id) {
+        await this.model.deleteOne({ id: id });
+        return;
+    }
 
-//     deleteProduct(id, productId) {
-//         let data = fs.readFileSync(this.filePath, 'utf8')
-//         let newData = JSON.parse(data);
-//         let result = newData.filter((item) => item.id == id);
-//         result[0].products = result[0].products.filter((item) => item.id != productId);
-//         fs.writeFileSync(this.filePath, JSON.stringify(newData, null, 2))
-//     }
+    async addProduct(id, product) {
+        product.id = await this.newIdProduct(id);
+        product.time = moment().format("h:mm:ss");
+        await this.model.updateOne({ id: id }, { $push: { products: product } });
+    }
 
-//     arrayLength() {
-//         const data = fs.readFileSync(this.filePath, 'utf8')
-//         let newData = JSON.parse(data);
-//         let length = newData.length;
-//         return length;
-//     }
+    async deleteProduct(id, productId) {
+        let idProduct = parseInt(productId);
+        await this.model.updateOne({ id: id }, { $pull: { products: { id: idProduct } } });
+    }
 
-//     newId() {
-//         const data = fs.readFileSync(this.filePath, 'utf8')
-//         let newData = JSON.parse(data);
-//         if (newData.length === 0) {
-//             return 1;
-//         }
-//         let lastObj = newData[newData.length - 1].id
-//         let newId = lastObj + 1;
-//         return newId;
-//     }
+    async newId() {
+        const data = await this.model.find({});
+        if (data.length === 0) {
+            return 1;
+        }
+        let lastObj = data[data.length - 1].id
+        let newId = lastObj + 1;
+        return newId;
+    }
 
-//     cartExist(id) {
-//         let data = fs.readFileSync(this.filePath, 'utf8')
-//         let newData = JSON.parse(data);
-//         let result = newData.filter((item) => item.id == id);
-//         if (result.length === 0) {
-//             return false;
-//         }
-//         return true;
-//     }
-// }
+    async newIdProduct(id) {
+        const data = await this.model.find({ id: id });
+        const newData = data[0].products;
+        if (newData.length === 0) {
+            return 1;
+        }
+        let lastObj = newData[newData.length - 1].id
+        let newId = lastObj + 1;
+        return newId;
+    }
+}
 
-// module.exports = CartList;
+module.exports = new CartList();
