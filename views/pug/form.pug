@@ -34,6 +34,7 @@ block content
                 div(class="linea")
             div(class="contenedor margin-top")
                 h2(class="title") Centro de mensajes
+                h3(class="title" id="compresion") -
                 div(class="linea")
                 h2(class="h2 title", id="nada") NO HAY MENSAJES
                 div(class="mensajes" id="divMensajes")
@@ -43,9 +44,14 @@ block content
                         div(class="form-label")
                             input(class="input-emails", id="email", name="autor", class="mensaje-email", placeholder="Ingrese su email")
                         div(class="form-label")
+                            input(class="input-emails", id="name", name="name", class="mensaje-email", placeholder="Ingrese su Nombre")
+                        div(class="form-label")
+                            input(class="input-emails", id="lastName", name="lastName", class="mensaje-email", placeholder="Ingrese su Apellido")
+                        div(class="form-label")
                             input(class="input-emails", id="mensaje", name="mensaje", class="mensaje-emails", placeholder="Ingrese un mensaje")
                     div
                         button(class="boton", id="boton-mail", type="submit") Enviar
 
+    script(src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js")
     script(src="/socket.io/socket.io.js")
     script(src="/static/js/index.js")

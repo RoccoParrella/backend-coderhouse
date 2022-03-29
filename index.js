@@ -13,8 +13,7 @@
     const router = require(`./routes/home`);
     const routerMovies= require(`./routes/productos`);
     const routerCart = require(`./routes/carrito`);
-    const routerFireProd = require(`./routes/productosFirestore`);
-    const Sql = require('./controllers/sql');
+    const Mongo = require('./controllers/Mongo');
     const Movie = require('./controllers/sqlite');
 
 
@@ -30,13 +29,13 @@
 
         io.on('connection', async (socket) => {
             socket.on("mensajes", async (data) => {
-                await Sql.all(data);
-                let arrayMsg = await Sql.getAll();
+                await Mongo.all(data);
+                let arrayMsg = await Mongo.getAll();
                 socket.emit("mensajesCompleto", arrayMsg);
                 socket.broadcast.emit("mensajesCompleto", arrayMsg);
             });
-            if (await Sql.allLenght() !== 0) {
-                socket.emit("mensajesCompleto", await Sql.getAll());
+            if (await Mongo.allLenght() !== 0) {
+                socket.emit("mensajesCompleto", await Mongo.getAll());
             }
             socket.on("send-pelis", async (data) => {
                 await Movie.saveMovie(data);
@@ -52,7 +51,7 @@
         app.use(`/${motor}`, router);
         app.use(`/api`, routerMovies);
         app.use('/api', routerCart);
-        app.use('/firestore', routerFireProd);
+
 
         server.on('error', (err) => {
             console.log(`Error: ${err} en el servidor`);

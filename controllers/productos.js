@@ -1,4 +1,5 @@
 const moviesMongo = require('../models/moviesMongo');
+const faker = require('faker');
 
 const isAdmin = true;
 
@@ -13,6 +14,18 @@ module.exports = {
             return
         }
         res.status(200).send(data);
+    },
+    getProductsRandom: async (req, res)  => {
+        let productos = [];
+        for (let i = 0; i < 5; i++) {
+            const producto = {
+                title: faker.commerce.productName(),
+                price: faker.commerce.price(),
+                image: faker.image.imageUrl()
+            }
+            productos.push(producto);
+        }
+        res.status(200).send(productos);
     },
     getProductById: async (req, res) => {
         const id = req.params.id
@@ -65,8 +78,6 @@ module.exports = {
         })
     },
     notFound: (req, res) => {
-        // // console.log(req._parsedOriginalUrl.path)
-        // let url = req._parsedOriginalUrl.pathname;
         res.status(404).send({
             error: 404,
             message: `ruta: no encontrada`
