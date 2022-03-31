@@ -7,6 +7,8 @@
     const path = require('path');
     const { Server } = require('socket.io')
     const io = new Server(server);
+    const session = require('express-session');
+    const mongoStore = require('connect-mongo')
 
     const { HOSTNAME, USER, OPTION, DATABASE, PASSWORD, SCHEMA } = require('./config');
     const engine = require('./engines/engine');
@@ -16,14 +18,20 @@
     const Mongo = require('./controllers/Mongo');
     const Movie = require('./controllers/sqlite');
 
-
-    // Connect to MongoDB
     mongoose.connect(`${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`).then(() => {
         console.log('🥵Connected to MongoDB🥵');
 
-        const motor = "pug";
-        engine(app, motor);
+        engine(app);
         app.use(express.json());
+        app.use(session({
+            secret: 'secret',
+            resave: true,
+            saveUninitialized: true,
+            store: new mongoStore({
+                mongoUrl: `${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`,
+                expires: 1000 * 60 * 10
+            })
+        }))
         app.use("/static", express.static(path.join(__dirname, 'public')))
         app.use(express.urlencoded({ extended: true }));
 
@@ -48,7 +56,7 @@
             }
         });
 
-        app.use(`/${motor}`, router);
+        app.use(`/`, router);
         app.use(`/api`, routerMovies);
         app.use('/api', routerCart);
 

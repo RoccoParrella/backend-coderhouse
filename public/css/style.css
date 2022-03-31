@@ -358,3 +358,39 @@ span {
     margin: 0;
     padding-left: 5px ;
 }
+
+.main-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor-login{
+    padding: 20px 30px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#btn-login{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.contenedor-bye{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.h2-bye{
+    color: white;
+    font-size: 50px;
+}
