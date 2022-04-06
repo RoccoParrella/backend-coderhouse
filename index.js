@@ -10,6 +10,10 @@
     const session = require('express-session');
     const mongoStore = require('connect-mongo')
 
+    const passport = require('passport');
+    const flash = require('express-flash');
+    const initializePassport = require('./passport/local');
+
     const { HOSTNAME, USER, OPTION, DATABASE, PASSWORD, SCHEMA } = require('./config');
     const engine = require('./engines/engine');
     const router = require(`./routes/home`);
@@ -21,19 +25,27 @@
     mongoose.connect(`${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`).then(() => {
         console.log('🥵Connected to MongoDB🥵');
 
+        initializePassport(passport)
+
         engine(app);
         app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
+        app.use(flash());
         app.use(session({
             secret: 'secret',
             resave: true,
             saveUninitialized: true,
             store: new mongoStore({
                 mongoUrl: `${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`,
-                expires: 1000 * 60 * 10
+                ttl: 10 * 60,
+                expires: 1000 * 60 * 10,
+                autoRemove: "native"
             })
         }))
+        app.use(passport.initialize());
+        app.use(passport.session());
         app.use("/static", express.static(path.join(__dirname, 'public')))
-        app.use(express.urlencoded({ extended: true }));
+        
 
         io.on('connection', async (socket) => {
             socket.on("mensajes", async (data) => {
@@ -55,6 +67,7 @@
                 socket.emit("send-pelis-completo", await Movie.getAll());
             }
         });
+
 
         app.use(`/`, router);
         app.use(`/api`, routerMovies);

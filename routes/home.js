@@ -1,65 +1,41 @@
 const { Router } = require("express");
 const router = new Router();
-const Contenedor = require('../models/clase');
-const newProduct = new Contenedor('./database/productos.txt');
 const auth = require('../middlewares/auth');
-const session = require('express-session');
+const { getLogin, getSignUp, getHome, getLogout, getBye, getSearch, getAdd, getResult, postAdd, getError, getErrorSignUp } = require('../controllers/home');
+const passport = require('passport');
 
-router.get('/', auth, (req, res) => {
-    const data = newProduct.getAll();
-    let user = req.session.user.user;
-    if (data.length < 0) {
-        res.status(200).render('index');
-    } else {
-        res.status(200).render('index', { data, user });
-    }
-})
+router.get('/', auth, getHome);
 
-router.get('/login', (req, res) => {
-    res.render('login');
-})
+router.get('/login', getLogin);
 
-router.get('/logout', (req, res) => {
-    let users = req.session.user.user
-    req.session.destroy((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect(`bye?user=${users}`);
-        }
-    })
-})
+router.get('/signup', getSignUp);
 
-router.get('/bye', (req, res) => {
-    res.render('bye', { user: req.query.user });
-})
+router.get('/logout', getLogout)
 
-router.post('/login', (req, res) => {
-    const { user, password } = req.body;
-    req.session.user = { 
-        user: user,
-        password: password
-    };
-    res.redirect('/');
-})
+router.get('/bye', getBye);
 
-router.get(`/buscar`, auth, (req, res) => {
-    const pelicula = req.query.categoria;
-    const peliculas = newProduct.getAll(pelicula);
-    res.status(200).render('category', { peliculas, pelicula });
-})
+router.get("/error", getError)
 
-router.get('/add', auth, (req, res) => {
-    res.status(200).render('form');
-})
-router.get('/result', auth, (req, res) => {
-    const pelicula = req.query.movie;
-    res.status(200).render('result', { pelicula });
-})
+router.get("/errorR", getErrorSignUp)
 
-router.post('/add', (req, res) => {
-    newProduct.save({ title: req.body.titulo, tipo: req.body.tipo, duration: req.body.duracion, urlImg: req.body.img });
-    res.status(201).redirect(`/pug/result?movie=${req.body.titulo}`);
-})
+router.post('/login', passport.authenticate('login', {
+    successRedirect: '/',
+    failureRedirect: '/error',
+    failureFlash: true
+}))
+
+router.post("/signup", passport.authenticate('register', {
+    successRedirect: '/',
+    failureRedirect: '/errorR',
+    failureFlash: true
+}))
+
+router.get(`/buscar`, auth, getSearch)
+
+router.get('/add', auth, getAdd)
+
+router.get('/result', auth, getResult)
+
+router.post('/add', auth, postAdd)
 
 module.exports = router;

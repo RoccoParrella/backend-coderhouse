@@ -3,13 +3,15 @@ block content
 
     main(class="main-login")
         div(class="contenedor-login")
-            h2(class="h2-login")= pelicula
+            h2(class="h2-login") Iniciar sesión
             form(action="/login", method="post")
                 div(class="form-group")
-                    label(for="user") Usuario
-                    input(type="user" class="form-control" id="user" name="user" placeholder="Ingrese su usuario")
+                    label(for="email") Email
+                    input(type="user" class="form-control" id="email" name="email" placeholder="Ingrese su Email" required)
                 div(class="form-group")
                     label(for="password") Contraseña
-                    input(type="password" class="form-control" id="password" name="password" placeholder="Contraseña")
+                    input(type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required)
                 div(class="form-group")
                     button(type="submit" class="btn btn-primary btn-block" id="btn-login") Iniciar sesión
+                div(class="form-group")
+                    a(href="/signup") ¿No tienes una cuenta?
