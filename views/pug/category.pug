@@ -3,9 +3,9 @@ block content
 
     main
         div(class="contenedor-peliculas")
-            h2(class="h2-peliculas")= pelicula
+            h2(class="h2-peliculas")= category 
             ul(class="ul-peliculas")
-                each pelicula in peliculas
+                each pelicula in data
                     li(class="li-peliculas")
                         img(class="foto-peliculas", src=pelicula.urlImg, alt="")
                         p(class="p-peliculas")= pelicula.title

@@ -32,9 +32,9 @@ module.exports = {
         res.render('bye', { user: req.query.user });
     },
     getSearch: async (req, res) => {
-        const pelicula = req.query.categoria;
-        const peliculas = await moviesMongo.getAll(pelicula);
-        res.status(200).render('category', { peliculas, pelicula });
+        const category = req.query.categoria;
+        const data = await moviesMongo.getAllByTipo(category);
+        res.status(200).render('category', { data, category });
     },
     getAdd: (req, res) => {
         res.status(200).render('form');

@@ -20,7 +20,8 @@
     const routerMovies= require(`./routes/productos`);
     const routerCart = require(`./routes/carrito`);
     const Mongo = require('./controllers/Mongo');
-    const Movie = require('./controllers/sqlite');
+    const moviesMongo = require('./models/moviesMongo');
+
 
     mongoose.connect(`${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`).then(() => {
         console.log('🥵Connected to MongoDB🥵');
@@ -46,7 +47,6 @@
         app.use(passport.session());
         app.use("/static", express.static(path.join(__dirname, 'public')))
         
-
         io.on('connection', async (socket) => {
             socket.on("mensajes", async (data) => {
                 await Mongo.all(data);
@@ -58,21 +58,17 @@
                 socket.emit("mensajesCompleto", await Mongo.getAll());
             }
             socket.on("send-pelis", async (data) => {
-                await Movie.saveMovie(data);
-                let array = await Movie.getAll()
+                await moviesMongo.save(data);
+                let array = await moviesMongo.getAll()
                 socket.emit("send-pelis-completo", array);
                 socket.broadcast.emit("send-pelis-completo", array);
             })
-            if (Movie.allLenght() !== 0) {
-                socket.emit("send-pelis-completo", await Movie.getAll());
+            if (moviesMongo.getAllLenght() !== 0) {
+                socket.emit("send-pelis-completo", await moviesMongo.getAll());
             }
         });
 
-
         app.use(`/`, router);
-        app.use(`/api`, routerMovies);
-        app.use('/api', routerCart);
-
 
         server.on('error', (err) => {
             console.log(`Error: ${err} en el servidor`);

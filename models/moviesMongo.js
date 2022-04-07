@@ -30,6 +30,11 @@ class Movie {
         return data;
     }
 
+    async getAllByTipo(tipo) {
+        let data = await this.model.find({ tipo: tipo });
+        return data;
+    }
+
     async getById(id) {
         let data = await this.model.find({ id: id });
         return data;
@@ -49,6 +54,11 @@ class Movie {
         const data = await this.model.find({}).sort({ id: -1 }).limit(1);
         let id = data[0].id;
         return id;
+    }
+
+    async getAllLenght() {
+        let data = await this.model.find({});
+        return data.length;
     }
 }
 
