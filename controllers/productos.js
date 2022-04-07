@@ -15,18 +15,6 @@ module.exports = {
         }
         res.status(200).send(data);
     },
-    getProductsRandom: async (req, res)  => {
-        let productos = [];
-        for (let i = 0; i < 5; i++) {
-            const producto = {
-                title: faker.commerce.productName(),
-                price: faker.commerce.price(),
-                image: faker.image.imageUrl()
-            }
-            productos.push(producto);
-        }
-        res.status(200).send(productos);
-    },
     getProductById: async (req, res) => {
         const id = req.params.id
         let movie = await moviesMongo.getById(id);

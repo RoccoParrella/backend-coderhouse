@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/RoccoParrella/backend-coderhouse#readme",
   "dependencies": {
-    "@vscode/sqlite3": "^5.0.7",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
     "connect-redis": "^6.1.3",
@@ -31,7 +30,6 @@
     "knex": "^1.0.3",
     "moment": "^2.29.1",
     "mongoose": "^6.2.8",
-    "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
     "normalizr": "^3.6.2",
     "passport": "^0.5.2",

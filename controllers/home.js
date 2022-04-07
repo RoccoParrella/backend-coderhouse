@@ -1,9 +1,8 @@
-const Contenedor = require('../models/clase');
-const newProduct = new Contenedor('./database/productos.txt');
+const moviesMongo = require('../models/moviesMongo');
 
 module.exports = {
     getHome: async (req, res) => {
-        const data = newProduct.getAll();
+        const data = await moviesMongo.getAll();
         const { name, lastname } = req.user;
         const username = `${name} ${lastname}`;
         if (data.length < 0) {
@@ -34,7 +33,7 @@ module.exports = {
     },
     getSearch: async (req, res) => {
         const pelicula = req.query.categoria;
-        const peliculas = newProduct.getAll(pelicula);
+        const peliculas = await moviesMongo.getAll(pelicula);
         res.status(200).render('category', { peliculas, pelicula });
     },
     getAdd: (req, res) => {

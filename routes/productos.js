@@ -8,10 +8,6 @@ const router = new Router();
 
 router.get('/productos', productos.getProducts);
 
-// Traer un 5 productos aleatorios
-
-router.get('/productos-test', productos.getProductsRandom);
-
 // Ruta no encontrada
 
 router.get('/*', productos.notFound)

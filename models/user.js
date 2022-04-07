@@ -32,7 +32,6 @@ class UserModel {
         return await this.model.findById(id);
     }
 
-
     // Obtiene un usuario por email
 
     async getByEmail(email) { 
@@ -53,9 +52,6 @@ class UserModel {
         const user = await this.model.findOne({ email });
         return await bcrypt.compare(password, user.password);
     }
-
-
 }
-
 
 module.exports = new UserModel();
