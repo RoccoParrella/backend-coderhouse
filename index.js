@@ -14,16 +14,13 @@
     const flash = require('express-flash');
     const initializePassport = require('./passport/local');
 
-    const { HOSTNAME, USER, OPTION, DATABASE, PASSWORD, SCHEMA } = require('./config');
     const engine = require('./engines/engine');
     const router = require(`./routes/home`);
-    const routerMovies= require(`./routes/productos`);
-    const routerCart = require(`./routes/carrito`);
     const Mongo = require('./controllers/Mongo');
     const moviesMongo = require('./models/moviesMongo');
 
 
-    mongoose.connect(`${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`).then(() => {
+    mongoose.connect(process.env.MONGOURL).then(() => {
         console.log('🥵Connected to MongoDB🥵');
 
         initializePassport(passport)
@@ -37,7 +34,7 @@
             resave: true,
             saveUninitialized: true,
             store: new mongoStore({
-                mongoUrl: `${SCHEMA}://${USER}:${PASSWORD}@${HOSTNAME}/${DATABASE}?${OPTION}`,
+                mongoUrl: process.env.MONGOURL,
                 ttl: 10 * 60,
                 expires: 1000 * 60 * 10,
                 autoRemove: "native"
@@ -46,7 +43,7 @@
         app.use(passport.initialize());
         app.use(passport.session());
         app.use("/static", express.static(path.join(__dirname, 'public')))
-        
+
         io.on('connection', async (socket) => {
             socket.on("mensajes", async (data) => {
                 await Mongo.all(data);
@@ -68,7 +65,21 @@
             }
         });
 
+        const { fork } = require("child_process");
+
         app.use(`/`, router);
+        app.get(`/api/random`, (req, res) => {
+            const model = fork(__dirname + "/models/model.js");
+            const num = req.query.num;
+
+            model.send({
+                message: "start",
+                n: num || 200000
+            })
+            model.on("message", (message) => {
+                res.send(message)
+            })
+        });
 
         server.on('error', (err) => {
             console.log(`Error: ${err} en el servidor`);
