@@ -65,21 +65,7 @@
             }
         });
 
-        const { fork } = require("child_process");
-
         app.use(`/`, router);
-        app.get(`/api/random`, (req, res) => {
-            const model = fork(__dirname + "/models/model.js");
-            const num = req.query.num;
-
-            model.send({
-                message: "start",
-                n: num || 200000
-            })
-            model.on("message", (message) => {
-                res.send(message)
-            })
-        });
 
         server.on('error', (err) => {
             console.log(`Error: ${err} en el servidor`);
