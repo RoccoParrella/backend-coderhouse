@@ -18,7 +18,7 @@ const enviarPelis = document.getElementById('enviar-pelis');
 const compresion = document.getElementById('compresion');
 
 socket = io();
-
+console.log("uwu");
 enviarPelis.addEventListener('click', (e) => {
     e.preventDefault();
     if (titulo.value == '' || tipo.value == '' || duracion.value == '' || img.value == '') {

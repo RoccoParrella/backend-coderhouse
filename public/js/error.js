@@ -1,3 +1,3 @@
 setTimeout(() => {
-    location.replace("http://localhost:8080/signup");
+    location.replace("http://localhost:8484/signup");
 }, 2000)
