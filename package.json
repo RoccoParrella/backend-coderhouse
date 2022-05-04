@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -r dotenv/config index.js",
-    "start:cluster": "node -r dotenv/config index.js"
+    "start:fork": "node -r dotenv/config server.js",
+    "start:cluster": "node -r dotenv/config server.js cluster"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,4 @@
-(async () => {
-    const PORT = process.env.PORT || 8080;
+module.exports = (async () => {
         const express = require('express');
         const mongoose = require('mongoose');
         const app = express()
@@ -20,8 +19,6 @@
 
 
         mongoose.connect(process.env.MONGOURL).then(() => {
-            console.log('🥵Connected to MongoDB🥵');
-
             initializePassport(passport)
             
             engine(app);
@@ -54,7 +51,5 @@
             console.log(err);
         });
 
-        server.listen(PORT, () => console.log(`🥵Server is running on port ${PORT}🥵`))
-        
-
+        return server;
 })()

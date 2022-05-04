@@ -1,3 +1,16 @@
 const cluster = require("cluster")
-    const os = require('os')
+const CPUs = require("os").cpus().length
+const server = require("./index")
+const PORT = process.env.PORT || 8080;
+const isCluster = process.argv[2] === 'cluster'
+
+if (cluster.isPrimary && isCluster) {
+    for (let i = 0; i < CPUs; i++) {
+        cluster.fork()
+    }
+} else {
+
+    server.then(server => server.listen(PORT, () => console.log(`🥵Server is running on port ${PORT}🥵`)))
     
+    console.log("🥵Worker is running on process: " + process.pid)
+}

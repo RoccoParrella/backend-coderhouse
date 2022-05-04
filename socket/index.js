@@ -1,12 +1,7 @@
 const Mongo = require('../controllers/Mongo');
 const moviesMongo = require('../models/moviesMongo');
 
-
-
-
 module.exports = async (socket)  => {
-
-    console.log('🥵Connected to Socket.io🥵');
 
 socket.on("mensajes", async (data) => {
     await Mongo.all(data);
