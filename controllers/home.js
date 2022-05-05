@@ -1,7 +1,9 @@
 const moviesMongo = require('../models/moviesMongo');
+const logger = require('../log/winston');
 
 module.exports = {
     getHome: async (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina principal');
         const data = await moviesMongo.getAll();
         const { name, lastname } = req.user;
         const username = `${name} ${lastname}`;
@@ -12,15 +14,18 @@ module.exports = {
         }
     },
     getLogin: async (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de login');
         res.status(200).render('login');
     },
     getLogout: async (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de logout');
         const { name, lastname } = req.user;
         const username = `${name} ${lastname}`;
         req.logOut();
         res.status(200).render('bye', { username });
     },
     getSignUp: async (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de signup');
         let error = req.query.error;
         if(error == 1){
             res.status(200).render('signup', { error: 'Usuario ya registrado' });
@@ -29,14 +34,17 @@ module.exports = {
         res.render('signup');
     },
     getBye: (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de bye');
         res.render('bye', { user: req.query.user });
     },
     getSearch: async (req, res) => {
         const category = req.query.categoria;
+        logger.info(`Un usuario ha accedido a la pagina de ${category}`);
         const data = await moviesMongo.getAllByTipo(category);
         res.status(200).render('category', { data, category });
     },
     getAdd: (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de add');
         res.status(200).render('form');
     },
     postAdd: async (req, res) => {
@@ -44,13 +52,16 @@ module.exports = {
         res.status(201).redirect(`/result?movie=${req.body.titulo}`);
     },
     getResult: (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de result');
         const pelicula = req.query.movie;
         res.status(200).render('result', { pelicula });
     },
     getError: (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de error');
         res.status(404).render('error');
     },
     getErrorSignUp: (req, res) => {
+        logger.info('Un usuario ha accedido a la pagina de error signup');
         res.status(404).render('errorR');
     }
 

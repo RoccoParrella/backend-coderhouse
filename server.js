@@ -9,8 +9,5 @@ if (cluster.isPrimary && isCluster) {
         cluster.fork()
     }
 } else {
-
     server.then(server => server.listen(PORT, () => console.log(`🥵Server is running on port ${PORT}🥵`)))
-    
-    console.log("🥵Worker is running on process: " + process.pid)
 }

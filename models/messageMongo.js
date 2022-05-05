@@ -1,5 +1,4 @@
 const { model, Schema } = require('mongoose');
-const moment = require('moment');
 const faker = require('faker');
 const { normalize, schema } = require('normalizr');
 
