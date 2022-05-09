@@ -19,7 +19,7 @@ module.exports = (async () => {
         const chat = require('./socket/index');
 
 
-        mongoose.connect(process.env.MONGOURL).then(() => {
+        mongoose.connect("mongodb+srv://paella:M1o2n3g4o5@ecommerce.gazzm.mongodb.net/ecommerce?retryWrites=true&w=majority").then(() => {
             initializePassport(passport)
             
             engine(app);
