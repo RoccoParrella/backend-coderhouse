@@ -11,7 +11,7 @@
     "test:artillery": "artillery quick --count=100 -n 40 http://localhost:8484/a/append-bloq?txt=Holabloq > result_Bloq.txt",
     "test:artillery-cluster": "artillery quick --count=100 -n 40 http://localhost:8484/prime?max=100000 > result_cluster.txt",
     "profilling": "node --prof -r dotenv/config server.js",
-    "test" : "node ./test/file.spec.js",
+    "test": "node ./test/file.spec.js",
     "0x": "0x server.js"
   },
   "repository": {
@@ -27,7 +27,6 @@
   "homepage": "https://github.com/RoccoParrella/backend-coderhouse#readme",
   "dependencies": {
     "0x": "^5.2.1",
-    "artillery": "^2.0.0-14",
     "autocannon": "^7.9.0",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
