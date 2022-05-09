@@ -17,10 +17,6 @@ module.exports = (async () => {
         const engine = require('./engines/engine');
         const chat = require('./socket/index');
 
-
-        app.get('/', (req, res) => {
-            res.sendStatus(200);
-        })
         mongoose.connect(process.env.MONGOURI).then(() => {
             initializePassport(passport)
             
