@@ -44,19 +44,6 @@ module.exports = (async () => {
             app.use("/static", express.static(path.join(__dirname, 'public')))
 
             io.on('connection', chat);
-            router.get('/info', (req,res)=>{
-                logger.info("Se accedio a la ruta /info")
-                res.send({ 
-                    rss:process.memoryUsage().rss.toString(),
-                    argv: process.argv,
-                    cwd: process.cwd(),
-                    nodeVersion: process.env.npm_config_node_version,
-                    execPath: process.execPath,
-                    versionSO: process.env.OS,
-                    pid: process.pid.toString(),
-                    cpus: CPUS
-                })
-            })
             app.use('/', router);
 
             server.on('error', (err) => {
