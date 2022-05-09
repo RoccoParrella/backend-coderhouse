@@ -9,8 +9,6 @@ module.exports = (async () => {
         const session = require('express-session');
         const mongoStore = require('connect-mongo');
         const dotenv = require('dotenv').config();
-        const CPUS = require("os").cpus().length
-        const logger = require('./log/winston.js');
 
         const passport = require('passport');
         const flash = require('express-flash');
