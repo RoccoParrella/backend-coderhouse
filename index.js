@@ -29,7 +29,7 @@ module.exports = (async () => {
                 resave: true,
                 saveUninitialized: true,
                 store: new mongoStore({
-                    mongoUrl: process.env.MONGOURL,
+                    mongoUrl: process.env.MONGOURI,
                     ttl: 10 * 60,
                     expires: 1000 * 60 * 10,
                     autoRemove: "native"
