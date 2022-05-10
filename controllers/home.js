@@ -19,8 +19,8 @@ module.exports = {
     },
     getLogout: async (req, res) => {
         logger.info('Un usuario ha accedido a la pagina de logout');
-        const { name, lastname } = req.user;
-        const username = `${name} ${lastname}`;
+        const { lastname } = req.user;
+        const username = `${lastname}`;
         req.logOut();
         res.status(200).render('bye', { username });
     },
