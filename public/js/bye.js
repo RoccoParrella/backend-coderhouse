@@ -1,3 +1,3 @@
 setTimeout(() => {
-    location.replace("https://coderhouse-backend-netflix.herokuapp.com/login");
+    location.replace("http://localhost:8080/login");
 }, 2000)

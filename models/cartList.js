@@ -1,71 +1,46 @@
 const mongoose = require('mongoose');
-const moment = require('moment');
+const moviesModel = require('../models/moviesMongo');
 
 class CartList {
     constructor() {
         const schemma = new mongoose.Schema({
             products: Array,
-            timestamp: { type: Date, default: Date.now },
-            id: Number,
+            userId: Object,
         });
-
-        this.model = mongoose.model('carrito', schemma);
+        this.model = mongoose.model('cartList', schemma);
     }
 
-    async createCart(obj) {
-        let product = [];
-        obj.id = 1;
-        obj.time = moment().format("h:mm:ss");
-        obj.title !== undefined ? product.push(obj) : null;
-        let newId = await this.newId();
-        let cartObj = await this.model.create({ id: newId, products: product });
-        return cartObj;
+    // Crea un carrito cuando el usuario se registra y lo asigna a su id
+
+    async createCart() {
+        return await this.model.create({ products: [] });
     }
 
-    async getAll(id) {
-        let data = await this.model.find({ id: id });
-        if (data.length !== 0) {
-            let array = data[0].products;
-            return array;
-        }
-        return false;
+    // Trae el carrito de un usuario por su id
+
+    async getCartById(id) {
+        return await this.model.findById({ _id : id});
     }
 
-    async deleteCart(id) {
-        await this.model.deleteOne({ id: id });
-        return;
+    // Agrega un producto al carrito de un usuario
+
+    async addProduct(id, productId) {
+        let idProduct = parseInt(productId);
+        const product = await moviesModel.getById(idProduct);
+        await this.model.findByIdAndUpdate(id, { $push: { products: product[0] } });
     }
 
-    async addProduct(id, product) {
-        product.id = await this.newIdProduct(id);
-        product.time = moment().format("h:mm:ss");
-        await this.model.updateOne({ id: id }, { $push: { products: product } });
+    // Vacio el carro de un usuario
+
+    async emptyCart(id) {
+        await this.model.updateOne({ id: id }, { $set: { products: [] } });
     }
+
+    // Borra un producto del carrito de un usuario
 
     async deleteProduct(id, productId) {
         let idProduct = parseInt(productId);
         await this.model.updateOne({ id: id }, { $pull: { products: { id: idProduct } } });
-    }
-
-    async newId() {
-        const data = await this.model.find({});
-        if (data.length === 0) {
-            return 1;
-        }
-        let lastObj = data[data.length - 1].id
-        let newId = lastObj + 1;
-        return newId;
-    }
-
-    async newIdProduct(id) {
-        const data = await this.model.find({ id: id });
-        const newData = data[0].products;
-        if (newData.length === 0) {
-            return 1;
-        }
-        let lastObj = newData[newData.length - 1].id
-        let newId = lastObj + 1;
-        return newId;
     }
 }
 

@@ -5,7 +5,7 @@ block content
         div(class="main-form")
             div(class="contenedor margin-top")
                 p(class="title") Agregue una pelicula o serie 
-                form(action="/pug/add", enctype="multipart/form-data", method="post")
+                form()
                     div(class="form-label")
                         label(for="titulo") Titulo
                         input(id="titulo" ,name="titulo")
@@ -55,3 +55,5 @@ block content
     script(src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js")
     script(src="/socket.io/socket.io.js")
     script(src="/static/js/index.js")
+    script(src="/static/js/cart.js")
+    script(src="/static/js/inicializarBadget.js")

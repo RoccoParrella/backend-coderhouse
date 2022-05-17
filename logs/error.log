@@ -2,3 +2,74 @@
 2022-05-04T20:06:27.023Z [error] El email rocco@gmail.com no esta registrado!
 2022-05-04T20:06:56.980Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
 2022-05-04T20:07:22.939Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-12T05:10:32.076Z [warn] El password no es validad!
+2022-05-14T00:06:41.711Z [error] Error al registrar el usuario: MongooseError: document must have an _id before saving
+2022-05-14T00:06:41.711Z [error] Error al registrar el usuario: MongooseError: document must have an _id before saving
+2022-05-14T00:53:59.845Z [error] El email businessroccoparrella@gmail.com no esta registrado!
+2022-05-14T00:53:59.845Z [error] El email businessroccoparrella@gmail.com no esta registrado!
+2022-05-14T03:51:01.905Z [error] Error al registrar el usuario: ValidationError: id: Cast to Number failed for value "{ id: undefined }" (type Object) at path "id"
+2022-05-14T03:51:01.905Z [error] Error al registrar el usuario: ValidationError: id: Cast to Number failed for value "{ id: undefined }" (type Object) at path "id"
+2022-05-14T03:51:46.230Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-14T03:51:46.230Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-14T03:51:50.503Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-14T03:51:50.503Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-14T04:00:10.243Z [error] Error al registrar el usuario: ValidationError: id: Cast to Number failed for value "{ id: undefined }" (type Object) at path "id"
+2022-05-14T04:00:10.244Z [error] Error al registrar el usuario: ValidationError: id: Cast to Number failed for value "{ id: undefined }" (type Object) at path "id"
+2022-05-14T04:02:51.712Z [error] Error al registrar el usuario: MongooseError: document must have an _id before saving
+2022-05-14T04:02:51.713Z [error] Error al registrar el usuario: MongooseError: document must have an _id before saving
+2022-05-14T04:06:22.405Z [error] Error al registrar el usuario: ValidationError: id: Cast to Number failed for value "{ id: new ObjectId("627f2abee8706b8cd7d3c51d") }" (type Object) at path "id"
+2022-05-14T04:06:22.406Z [error] Error al registrar el usuario: ValidationError: id: Cast to Number failed for value "{ id: new ObjectId("627f2abee8706b8cd7d3c51d") }" (type Object) at path "id"
+2022-05-14T04:09:13.416Z [error] Error al registrar el usuario: ValidationError: id: Cast to string failed for value "{ id: new ObjectId("627f2b6984b98dc56d479f06") }" (type Object) at path "id"
+2022-05-14T04:09:13.417Z [error] Error al registrar el usuario: ValidationError: id: Cast to string failed for value "{ id: new ObjectId("627f2b6984b98dc56d479f06") }" (type Object) at path "id"
+2022-05-14T04:11:41.212Z [error] Error al registrar el usuario: MongooseError: document must have an _id before saving
+2022-05-14T04:11:41.213Z [error] Error al registrar el usuario: MongooseError: document must have an _id before saving
+2022-05-14T04:12:20.930Z [error] El email businessroccoparrella@gmail.comdd1 no esta registrado!
+2022-05-14T04:12:20.930Z [error] El email businessroccoparrella@gmail.comdd1 no esta registrado!
+2022-05-16T21:07:54.431Z [error] undefined
+2022-05-16T21:07:54.432Z [error] undefined
+2022-05-16T21:08:12.029Z [error] undefined
+2022-05-16T21:08:12.029Z [error] undefined
+2022-05-16T21:08:27.762Z [error] undefined
+2022-05-16T21:08:27.762Z [error] undefined
+2022-05-16T21:08:47.035Z [error] undefined
+2022-05-16T21:08:47.036Z [error] undefined
+2022-05-16T21:09:31.013Z [error] undefined
+2022-05-16T21:09:31.013Z [error] undefined
+2022-05-16T21:11:01.095Z [error] undefined
+2022-05-16T21:11:01.096Z [error] undefined
+2022-05-16T21:11:49.666Z [error] undefined
+2022-05-16T21:11:49.667Z [error] undefined
+2022-05-16T21:12:23.164Z [error] undefined
+2022-05-16T21:12:23.164Z [error] undefined
+2022-05-16T21:13:09.810Z [error] undefined
+2022-05-16T21:13:09.810Z [error] undefined
+2022-05-16T21:14:00.410Z [error] undefined
+2022-05-16T21:14:00.410Z [error] undefined
+2022-05-16T21:14:24.965Z [error] undefined
+2022-05-16T21:14:24.965Z [error] undefined
+2022-05-16T21:14:42.774Z [error] undefined
+2022-05-16T21:14:42.775Z [error] undefined
+2022-05-16T21:14:56.624Z [error] undefined
+2022-05-16T21:14:56.625Z [error] undefined
+2022-05-16T21:36:24.836Z [error] undefined
+2022-05-16T21:36:24.836Z [error] undefined
+2022-05-16T21:36:58.793Z [error] undefined
+2022-05-16T21:36:58.794Z [error] undefined
+2022-05-16T21:38:09.987Z [error] undefined
+2022-05-16T21:38:09.988Z [error] undefined
+2022-05-16T21:38:21.260Z [error] undefined
+2022-05-16T21:38:21.261Z [error] undefined
+2022-05-16T22:05:59.664Z [error] undefined
+2022-05-16T22:05:59.664Z [error] undefined
+2022-05-16T23:09:33.091Z [error] El email fitoto13@yahoo.com ya esta registrado!
+2022-05-16T23:09:33.091Z [error] El email fitoto13@yahoo.com ya esta registrado!
+2022-05-17T04:33:12.963Z [error] undefined
+2022-05-17T04:33:12.963Z [error] undefined
+2022-05-17T04:33:17.842Z [error] undefined
+2022-05-17T04:33:17.842Z [error] undefined
+2022-05-17T04:33:29.646Z [error] undefined
+2022-05-17T04:33:29.647Z [error] undefined
+2022-05-17T05:36:23.946Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-17T05:36:23.947Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-17T05:36:34.267Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-17T05:36:34.267Z [error] El email businessroccoparrella@gmail.com ya esta registrado!

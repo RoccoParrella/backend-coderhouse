@@ -7,47 +7,42 @@ module.exports = (async () => {
         const { Server } = require('socket.io')
         const io = new Server(server);
         const session = require('express-session');
-        const mongoStore = require('connect-mongo');
+        const config = require('./config');
+        const engine = require('./engines/engine');
+        const chat = require('./socket/index');
+        const logger = require('./log/winston');
 
         const passport = require('passport');
         const flash = require('express-flash');
         const initializePassport = require('./passport/local');
 
-        const router = require('./routes/home');
-        const engine = require('./engines/engine');
-        const chat = require('./socket/index');
+        const routerHome = require('./routes/home');
+        const routerLogin = require('./routes/login');
+        const apiCart = require('./routes/apiCart');
+        const apiUser = require('./routes/apiUser');
 
-        mongoose.connect(process.env.MONGOURI).then(() => {
+        mongoose.connect(config.MONGOURI).then(() => {
             initializePassport(passport)
-            
             engine(app);
             app.use(express.json());
             app.use(express.urlencoded({ extended: true }));
             app.use(flash());
-            app.use(session({
-                secret: 'secret',
-                resave: true,
-                saveUninitialized: true,
-                store: new mongoStore({
-                    mongoUrl: process.env.MONGOURI,
-                    ttl: 10 * 60,
-                    expires: 1000 * 60 * 10,
-                    autoRemove: "native"
-                })
-            }))
+            app.use(session(config.MONGOSTORE))
             app.use(passport.initialize());
             app.use(passport.session());
             app.use("/static", express.static(path.join(__dirname, 'public')))
-
+            
             io.on('connection', chat);
-            app.use('/', router);
 
-            server.on('error', (err) => {
-                console.log(err);
-            });
+            app.use('/', routerHome);
+            app.use('/', routerLogin);
+
+            // APIS
+            app.use('/api/user', apiUser);
+            app.use('/api/cart', apiCart)
 
         }).catch(err => {
-            console.log(err);
+            logger.error(err);
         });
 
         return server;

@@ -1,6 +1,7 @@
 const LocalStrategy = require("passport-local").Strategy
 const userModel = require('../models/user.js');
 const logger = require("../log/winston");
+const cartModel = require('../models/cartList.js')
 
 module.exports = (passport) => {
     const authenticateUser = async (email, password, done) => {
@@ -21,23 +22,28 @@ module.exports = (passport) => {
         }
     }
 
-    const registerUser = async (req, email, password, done) => {
-        const { name, lastname } = req.body
+    const registerUser = async  (req, email, password, done) => {
+        const { name, lastname, pais, prefix, number } = req.body
         try {
             if (await userModel.existsByEmail(email)) {
                 logger.error(`El email ${email} ya esta registrado!`);
                 return done(null, false, { message: 'Usuario ya registrado' })
             }
+
+            const cart = await cartModel.createCart()
+
             const user = await userModel.save({
                 email,
+                cartId: cart._id,
                 password,
                 name,
+                img: "https://cardiologiaroca.com/wp-content/uploads/2015/11/sin-foto.png",
                 lastname,
+                country : pais,
+                number: `${prefix}${number}` 
             })
-            done(null, {
-                ...user,
-                username: `${user.name} ${user.lastname}`
-            })
+            
+            done(null, user)
         } catch (err) {
             logger.error(`Error al registrar el usuario: ${err}`);
             done(err)

@@ -22,7 +22,7 @@ class Movie {
         } else {
             obj.id = await this.idProduct() + 1;
         }
-        const movie = await this.model.create(obj)
+        const movie = await this.model.create({title: obj.titulo, tipo: obj.tipo, duration: obj.duracion, urlImg: obj.img});
         logger.info(`Se ha agregado con exito ${obj.title} con el id N${obj.id}`);
         return movie;
     }

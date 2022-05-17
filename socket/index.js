@@ -1,7 +1,7 @@
 const Mongo = require('../controllers/Mongo');
 const moviesMongo = require('../models/moviesMongo');
 
-module.exports = async (socket)  => {
+module.exports = async (socket, req)  => {
 
 socket.on("mensajes", async (data) => {
     await Mongo.all(data);
@@ -14,7 +14,7 @@ if (await Mongo.allLenght() !== 0) {
     socket.emit("mensajesCompleto", await Mongo.getAll());
 }
 socket.on("send-pelis", async (data) => {
-    await moviesMongo.save(data);
+    await moviesMongo.create(data);
     let array = await moviesMongo.getAll()
     socket.emit("send-pelis-completo", array);
     socket.broadcast.emit("send-pelis-completo", array);

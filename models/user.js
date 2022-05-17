@@ -3,54 +3,67 @@ const bcrypt = require('bcrypt');
 
 class UserModel {
     constructor() {
-        const schema = new Schema ({
+        const schema = new Schema({
             email: String,
             name: String,
             lastname: String,
-            password: String
+            password: String,
+            img: String,
+            country: String,
+            number: Number,
+            cartId: Object
         })
         this.model = model('users', schema);
     }
 
-    // Guarda usuario
+    // Save user in the database
 
     async save(user) {
         user.password = await bcrypt.hash(user.password, 10);
-        await this.model.create(user);
-        return user;
+        const usuario = await this.model.create(user);
+        return {
+            _id: usuario._id,
+            email: usuario.email,
+            name: usuario.name,
+            lastname: usuario.lastname,
+            img: usuario.img,
+            username: `${usuario.name} ${usuario.lastname}`,
+            country: usuario.country,
+            number: usuario.number,
+            cartId: usuario.cartId,
+        };
     }
 
-    // Devuelve true or false
+    //  Return a boolean indicating if the email exists in the database
 
     existsByEmail(email) {
         return this.model.exists({ email });
     }
 
-    // Devuelve un usuario por id
+    // Return user by ID
 
     async getById(id) {
         return await this.model.findById(id);
     }
 
-    // Obtiene un usuario por email
+    // Return user by email
 
-    async getByEmail(email) { 
-        const user = await this.model.findOne({ email });
-        const usuario = {
-            id: user._id,
-            email: user.email,
-            name: user.name,
-            lastname: user.lastname,
-            username: `${user.name} ${user.lastname}`
-        }
-        return usuario;
+    async getByEmail(email) {
+        return await this.model.findOne({ email });
     }
 
-    // Regresa true or false
+    // Return a boolean indicating if password is valid
 
     async isPasswordValid(email, password) {
         const user = await this.model.findOne({ email });
         return await bcrypt.compare(password, user.password);
+    }
+
+    // Upload the img of the user
+
+    async uploadImg(id, img) {
+        const imgCompleta = '/static/img/users/' + img;
+        return await this.model.findByIdAndUpdate(id, { img: imgCompleta });
     }
 }
 

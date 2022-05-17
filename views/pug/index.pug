@@ -3,14 +3,19 @@ block content
 
     main
         div(class="contenedor")
-            p(class="title")= `Bienvenido ${username} a `
+            p(class="title")= `Bienvenido ${user.name} a `
                 span Netflix
+            
         div(class="contenedor-peliculas")
             h2(class="h2-peliculas") PELICULAS y SERIES
             ul(class="ul-peliculas")
+            
                 each pelicula in data
                     li(class="li-peliculas")
                         img(class="foto-peliculas", src=pelicula.urlImg, alt="")
                         p(class="p-peliculas")= pelicula.title
                         p(class="p-duration")= pelicula.duration
-        div(class="contenedor-peliculas")
+                        button(onclick=`addToCart('${cartId}', '${pelicula.id}')`) Agregar al carrito
+
+    script(src="/static/js/cart.js")
+    script(src="/static/js/inicializarBadget.js")
