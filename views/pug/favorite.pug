@@ -3,13 +3,20 @@ block content
 
     main 
         div(class="contenedor-peliculas") 
-            h2(class="h2-peliculas") TUS PELICULAS FAVORITAS
-            ul(class="ul-peliculas")
-                each pelicula in data
-                    li(class="li-peliculas")
-                        img(class="foto-peliculas", src=pelicula.urlImg, alt="")
-                        p(class="p-peliculas")= pelicula.title
-                        p(class="p-duration")= pelicula.duration
-                        button(onclick=`addToCart('${cartId}', '${pelicula.id}')`) ELIMINAR
+            ul(class="ul-peliculas" id="cart-list")
+                - let longitudArray = data.length
+                if data.length === 0
+                    p(class="empty-cart") No hay peliculas en el carrito
+                else 
+                    each pelicula in data
+                        li(class="li-peliculas" id=`${pelicula.id}`)
+                            img(class="foto-peliculas", src=pelicula.urlImg, alt="")
+                            p(class="p-peliculas")= pelicula.title
+                            p(class="p-duration")= pelicula.duration
+                            img(src="https://cdn-icons.flaticon.com/png/512/3687/premium/3687412.png?token=exp=1652915196~hmac=420af028d445f759deb95c506745c24e" class="logo-delete-favorite" onclick=`removeFromCart('${user.cartId}', '${pelicula.id}')`)
+                    a(class="boton-comprar" href="/confirm") Concretar compra
+                
+                
 
-        
+    script(src="/static/js/cart.js")
+    script(src="/static/js/inicializarBadget.js")

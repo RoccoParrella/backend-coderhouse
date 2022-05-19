@@ -12,16 +12,12 @@ module.exports = {
     addToCart: async (req, res) => {
         const { cartId, productId } = req.params;
         await cartModel.addProduct(cartId, productId);
-        res.status(200)
-    },
-    emptyCart: async (req, res) => {
-        const { cartId } = req.params;
-        const cart = await cartModel.emptyCart(cartId);
-        return cart
+        res.sendStatus(200)
     },
     deleteProduct: async (req, res) => {
         const { cartId, productId } = req.params;
         const cart = await cartModel.deleteProduct(cartId, productId);
+        res.status(200)
         return cart
     }
 }

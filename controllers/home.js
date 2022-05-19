@@ -1,5 +1,6 @@
 const moviesMongo = require('../models/moviesMongo');
 const logger = require('../log/winston');
+const modelCart = require('../models/cartList');
 
 module.exports = {
     getHome: async (req, res) => {
@@ -33,9 +34,18 @@ module.exports = {
         const pelicula = req.query.movie;
         res.status(200).render('result', { pelicula });
     },
-    getCart: (req, res) => {
-        const { _id } = req.user;
+    getCart: async (req, res) => {
+        const { cartId } = req.user;
+        const dataCompleta = await modelCart.getCartById(cartId);
+        const data = dataCompleta.products;
         logger.info('Un usuario ha accedido a la pagina de Favoritos');
-        res.status(200).render('favorite', {});
+        res.status(200).render('favorite', { data, user: req.user });
+    },
+    getConfirm: async (req, res) => {
+        const { cartId } = req.user;
+        const dataCompleta = await modelCart.getCartById(cartId);
+        const data = dataCompleta.products;
+        logger.info('Un usuario ha accedido a la pagina de Confirmacion de compra');
+        res.status(200).render('confirmCart', { data, user: req.user });
     }
 }

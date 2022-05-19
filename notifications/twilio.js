@@ -6,7 +6,7 @@ class SmsSender {
         this.client = new twilio(config.TWILIO_SID, config.TWILIO_TOKEN);
     }
 
-    // Funcion para enviar un mensaje de texto a un numero de telefono
+    // Funcion para enviar un Whatsapp a un numero de telefono
 
     async sendWhatsapp(phone, message) {
         await this.client.messages.create({

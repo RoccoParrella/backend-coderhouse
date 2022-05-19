@@ -8,6 +8,7 @@ class UserModel {
             name: String,
             lastname: String,
             password: String,
+            edad: Number,
             img: String,
             country: String,
             number: Number,

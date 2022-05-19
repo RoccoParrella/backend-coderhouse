@@ -73,3 +73,7 @@
 2022-05-17T05:36:23.947Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
 2022-05-17T05:36:34.267Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
 2022-05-17T05:36:34.267Z [error] El email businessroccoparrella@gmail.com ya esta registrado!
+2022-05-18T02:42:55.796Z [error] Error al registrar el usuario: ValidationError: number: Cast to Number failed for value "++541165212282" (type string) at path "number"
+2022-05-18T02:42:55.797Z [error] Error al registrar el usuario: ValidationError: number: Cast to Number failed for value "++541165212282" (type string) at path "number"
+2022-05-19T02:19:43.727Z [error] Error al registrar el usuario: Error: No recipients defined
+2022-05-19T02:19:43.727Z [error] Error al registrar el usuario: Error: No recipients defined

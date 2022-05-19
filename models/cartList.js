@@ -33,7 +33,7 @@ class CartList {
     // Vacio el carro de un usuario
 
     async emptyCart(id) {
-        await this.model.updateOne({ id: id }, { $set: { products: [] } });
+        await this.model.findByIdAndUpdate(id , { $set: { products: [] } });
     }
 
     // Borra un producto del carrito de un usuario

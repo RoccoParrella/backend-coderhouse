@@ -1,5 +1,6 @@
+const cartBadge = document.getElementById('cart-badge')
+
 const updateCartBadge = async (parametro) => {
-    const cartBadge = document.getElementById('cart-badge')
     const cartLengthResponse = await fetch(`/api/cart/getAll`)
     const cart = await cartLengthResponse.json()
     if (parametro != 1) {
@@ -11,38 +12,16 @@ const updateCartBadge = async (parametro) => {
 
 const addToCart = async (cartId, productId) => {
     await updateCartBadge(1) 
-    await fetch(`/api/cart/${cartId}/${productId}`, { method: 'POST' })  
+    await fetch(`/api/cart/${cartId}/${productId}`, { method: 'POST' }) 
 }
 
 const removeFromCart = async (cartId, productId) => {
-    const res = await fetch(`/api/cart/${cartId}/${productId}`, { method: 'DELETE' })
-    if (res.status != 200) {
-        return
-    }
-    await updateCartBadge()
     const el = document.getElementById(productId)
     el.parentElement.removeChild(el)
+    cartBadge.innerHTML--
+    await fetch(`/api/cart/${cartId}/${productId}`, { method: 'DELETE' })
 }
 
-const emptyCart = async (cartId) => {
-    const res = await fetch(`/api/cart/all/${cartId}`, { method: 'DELETE' })
-    if (res.status != 200) {
-        return
-    }
-    await updateCartBadge()
-    const el = document.getElementById('cart-list')
-    el.innerHTML = ''
+const sendOrder = async (cartId) => {
+    fetch(`/api/sms/${cartId}`, { method: 'POST' })
 }
-
-// function sendOrder(pedidoId) {
-//     fetch(`/api/sms/${pedidoId}`, { method: 'POST' })
-//         .then(res => {
-//             if (res.status != 202) {
-//                 return
-//             }
-//             const row = document.getElementById(pedidoId)
-//             consz cell = row.children.item(3)
-//             cell.innerHTML = 'Si'
-//         })
-// }
-

@@ -29,6 +29,40 @@ body {
     transition: .2s;
 }
 
+.logo-delete-cart{
+    width: 40px;
+    height: 40px;
+    filter: invert(100);
+    margin-top: 85px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin-left: -40px;
+    position: absolute;
+    transition: .2s;
+} 
+
+.logo-delete-favorite{
+    width: 40px;
+    height: 40px;
+    /* filter: invert(100); */
+    margin-top: 85px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 50%;
+    margin-left: -40px;
+    position: absolute;
+    transition: .2s;
+}
+
+.logo-delete-favorite:hover{
+    filter: invert(0);
+    border: 2px solid #ffffff;
+}
+
+.logo-delete-cart:hover{
+    filter: invert(0);
+    border: 2px solid #ffffff;
+}
+
 .contenedor-profile {
     background: rgba(19, 19, 19, 0.75);
     box-shadow: 0 8px 32px 0 rgba(155, 155, 155, 0.37);
@@ -171,6 +205,52 @@ span {
     margin-top: 20px;
 }
 
+.perfil-1{
+    padding-top: 40px;
+    padding: 40px 10px 10px;
+    color: white;
+}
+
+.button-cerrar{
+    background-color: white;
+    color: black;
+    margin: 40px 0;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.boton-comprar{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    margin: 40px 0;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.boton-comprar:hover{
+    background-color: rgb(236, 236, 236);
+    color: rgb(12, 12, 12);
+}
+
+.li-peliculas-confirm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.button-cerrar:hover{
+    background-color: rgb(31, 31, 31);
+    color: white;
+    text-decoration: none;
+    
+    border-radius: 10px;
+}
+
 .ul-peliculas {
     list-style: none;
     display: flex;
@@ -207,6 +287,7 @@ span {
 
 .h2-peliculas {
     font-family: 'Bebas Neue';
+    color: #fff;
     letter-spacing: 3px;
     margin-top: 20px;
     margin-left: 2%;
