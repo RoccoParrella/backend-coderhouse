@@ -1,1 +1,13 @@
 
+2022-05-25T21:09:58.627Z [error] Error al registrar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:09:58.628Z [error] Error al registrar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:14:04.550Z [error] Error al registrar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:14:04.550Z [error] Error al registrar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:14:46.041Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:14:46.041Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:15:27.167Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:15:27.168Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:15:48.453Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:15:48.453Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:16:07.981Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')
+2022-05-25T21:16:07.981Z [error] Error al autenticar el usuario: TypeError: Cannot read properties of undefined (reading 'model')

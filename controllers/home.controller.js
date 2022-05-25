@@ -12,8 +12,9 @@ module.exports = {
         }
     },
     getSearch: async (req, res) => {
+        const category = req.query.categoria;
         logger.info(`Un usuario ha accedido a la pagina de ${category}`);
-        const data = await mainServices.getByTipo(req.query.categoria);
+        const data = await mainServices.getByTipo(category);
         res.status(200).render('category', { data, category, user: req.user });
     },
     getAdd: (req, res) => {
