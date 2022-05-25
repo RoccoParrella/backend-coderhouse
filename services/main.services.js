@@ -1,7 +1,6 @@
 const moviesModel = require('../models/movie.model');
 const modelCart = require('../models/cart.model');
 const modelUser = require('../models/user.model');
-const { existsByEmail, isPasswordValid, getByEmail } = require('../models/user.model');
 
 module.exports = {
     async getAllMovies() {
@@ -12,22 +11,22 @@ module.exports = {
         return await moviesModel.getAllByTipo(category);
     },
     async saveProducts(title, tipo, duration, urlImg) {
-        await moviesModel.create(title, tipo, duration, urlImg)
+        return await moviesModel.create(title, tipo, duration, urlImg)
     },
     async createUser(obj) {
-        modelUser.save(obj)
+        return await modelUser.save(obj)
     },
     async getUserById(id) {
         return await modelUser.getById(id);
     },
     async existsByEmail(email) {
-        return await existsByEmail(email);
+        return await modelUser.existsByEmail(email);
     },
     async getByEmail(email) {
-        return await getByEmail(email);
+        return await modelUser.getByEmail(email);
     },
     async isPasswordValid(email, password) {
-        return await isPasswordValid(email, password);
+        return await modelUser.isPasswordValid(email, password);
     },
     async createCart() {
         return await modelCart.createCart();
