@@ -4,11 +4,11 @@ module.exports = (async () => {
         const app = express()
         const server = require('http').Server(app)
         const path = require('path');
-        const { Server } = require('socket.io')
+        const { Server } = require('socket.io');
         const io = new Server(server);
         const session = require('express-session');
         const config = require('./config');
-        const engine = require('./engines/engine');
+        const engine = require('./engines');
         const chat = require('./socket/index');
         const logger = require('./log/winston');
 
@@ -16,11 +16,11 @@ module.exports = (async () => {
         const flash = require('express-flash');
         const initializePassport = require('./passport/local');
 
-        const routerHome = require('./routes/home');
-        const routerLogin = require('./routes/login');
-        const apiCart = require('./routes/apiCart');
-        const apiUser = require('./routes/apiUser');
-        const apiSend = require('./routes/apiSend');
+        const routerHome = require('./routes/router/home');
+        const routerLogin = require('./routes/router/login');
+        const apiCart = require('./routes/api/cart');
+        const apiUser = require('./routes/api/user');
+        const apiSend = require('./routes/api/sendMsg');
 
         mongoose.connect(config.MONGOURI).then(() => {
             initializePassport(passport)
@@ -35,6 +35,7 @@ module.exports = (async () => {
             
             io.on('connection', chat);
 
+            // ROUTES
             app.use('/', routerHome);
             app.use('/', routerLogin);
 

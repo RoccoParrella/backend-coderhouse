@@ -1,4 +1,4 @@
-const userModel = require('../models/user');
+const mainServices = require('../services/main.services');
 const logger = require('../log/winston');
 
 module.exports = {
@@ -9,9 +9,8 @@ module.exports = {
     getLogout: async (req, res) => {
         logger.info('Un usuario ha accedido a la pagina de logout');
         const { name, lastname } = req.user;
-        const username = `${name} ${lastname}`;
         req.logOut();
-        res.status(200).render('bye', { username });
+        res.status(200).render('bye', { username: `${name} ${lastname}` });
     },
     getSignUp: async (req, res) => {
         logger.info('Un usuario ha accedido a la pagina de signup');
@@ -33,7 +32,7 @@ module.exports = {
     getProfile: async (req, res) => {
         logger.info('Un usuario ha accedido a la pagina de profile');
         const userId = req.user._id;
-        const user = await userModel.getById(userId)
+        const user = await mainServices.getUserById(userId)
         res.status(200).render('profile', { user });
     }
 }

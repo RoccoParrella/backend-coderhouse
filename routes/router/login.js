@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const router = new Router();
 const passport = require('passport')
-const auth = require('../middlewares/auth');
+const auth = require('../../middlewares/auth');
 const multer  = require('multer')
-const userModel = require('../models/user');
+const userModel = require('../../models/user.model');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./public/img/users");
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-const { getLogin, getSignUp, getLogout, getErrorLogin, getErrorSignUp, getProfile } = require('../controllers/login')
+const { getLogin, getSignUp, getLogout, getErrorLogin, getErrorSignUp, getProfile } = require('../../controllers/login.controller')
 
 router.get('/login', getLogin);
 

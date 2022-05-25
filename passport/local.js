@@ -1,8 +1,7 @@
 const LocalStrategy = require("passport-local").Strategy
-const userModel = require('../models/user.js');
 const logger = require("../log/winston");
-const cartModel = require('../models/cartList.js')
-const emailSender = require('../notifications/email');
+const senderServices = require('../services/sender.services');
+const mainServices = require('../services/main.services');
 
 module.exports = (passport) => {
     const authenticateUser = async (email, password, done) => {
@@ -10,21 +9,21 @@ module.exports = (passport) => {
 
             // Busca el usuario por su email
 
-            if (!await userModel.existsByEmail(email)) {
+            if (!await mainServices.existsByEmail(email)) {
                 logger.error(`El email ${email} no esta registrado!`);
                 return done(null, false, { message: 'Usuario no registrado' });
             }
 
             // Busca el usuario por su email lo comparo con la contraseña
         
-            if (!await userModel.isPasswordValid(email, password)) {
+            if (!await mainServices.isPasswordValid(email, password)) {
                 logger.warn(`El password no es validad!`);
                 return done(null, false, { message: 'Contraseña incorrecta' });
             }
 
             // Si el usuario esta registrado y el password es valido, obtengo el usuario
 
-            const user = await userModel.getByEmail(email);
+            const user = await mainServices.getByEmail(email);
             done(null, user);
         } catch (e) {
             logger.error(`Error al autenticar el usuario: ${e}`);
@@ -35,18 +34,18 @@ module.exports = (passport) => {
     const registerUser = async (req, email, password, done) => {
         const { name, lastname, pais, prefix, number, edad } = req.body
         try {
-            if (await userModel.existsByEmail(email)) {
+            if (await mainServices.existsByEmail(email)) {
                 logger.error(`El email ${email} ya esta registrado!`);
                 return done(null, false, { message: 'Usuario ya registrado' })
             }
 
             // Creo el el carrito
 
-            const cart = await cartModel.createCart()
+            const cart = await mainServices.createCart()
 
             // Creo el usuario y le paso el id del carrito
             
-            const user = await userModel.save({
+            const user = await mainServices.createUser({
                 email,
                 cartId: cart._id,
                 password,
@@ -74,7 +73,7 @@ module.exports = (passport) => {
 
             // Envio el email
 
-            await emailSender.send(template, "nuevo registro", process.env.emailSender)
+            await senderServices.sendEmail(template, "nuevo registro", process.env.emailSender)
             done(null, user)
         } catch (err) {
             logger.error(`Error al registrar el usuario: ${err}`);

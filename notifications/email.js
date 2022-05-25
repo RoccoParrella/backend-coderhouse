@@ -1,8 +1,5 @@
 const nodemailer = require('nodemailer')
 
-//emailSender
-//PwdSender
-
 class MailSender {
 
     constructor() {

@@ -1,13 +1,11 @@
-const twilioSender = require('../notifications/twilio');
-const emailSender = require('../notifications/email');
-const modelCart = require('../models/cartList');
+const senderServices = require('../services/sender.services');
+const mainServices = require('../services/main.services');
 
 module.exports = {
     sendEmailAndWsp: async (req, res) => {
-        const { cartId } = req.params;
-        const { name, lastname, email } = req.user
+        const { name, lastname, email, cartId } = req.user
         const fullName = `${name} ${lastname}`;
-        const cart = await modelCart.getCartById(cartId);
+        const cart = await mainServices.getCartById(cartId);
         const products = cart.products;
         const mapeoDeProductos = products.map(p => `<li>${p.tipo}: ${p.title}</li>`)
         const template = `
@@ -19,9 +17,8 @@ module.exports = {
         `
         const asunto = `nuevo pedido de ${fullName}, su email es ${email}`;
         try {
-            await twilioSender.sendWhatsapp("+5491165212282", asunto);
-            await emailSender.send(template, asunto, email);
-            await modelCart.emptyCart(cartId);
+            await senderServices.sendEmailAndWsp(asunto, template, email);
+            await mainServices.emptyCart(cartId);
             res.status(200).json({
                 message: 'Email and Whatsapp sent successfully'
             });

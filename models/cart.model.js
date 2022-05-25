@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const moviesModel = require('../models/moviesMongo');
+const moviesModel = require('../models/movie.model');
 
 class CartList {
     constructor() {

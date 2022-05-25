@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = new Router();
-const { sendEmailAndWsp } = require("../controllers/apiCartControllers");
+const { sendEmailAndWsp } = require("../../controllers/sendMsg.controller");
 
 router.post('/:cartId', sendEmailAndWsp)
 
