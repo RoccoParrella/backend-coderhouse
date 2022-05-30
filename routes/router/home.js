@@ -12,7 +12,7 @@ router.get('/add', auth, getAdd)
 
 router.get('/result', auth, getResult)
 
-router.get(/favorite/, auth, getCart)
+router.get('/favorites', auth, getCart)
 
 router.get('/confirm', auth, getConfirm)
 

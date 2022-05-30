@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const UserDTO = require('./user/userDTO');
 
 class UserModel {
     constructor() {
@@ -15,6 +16,11 @@ class UserModel {
             cartId: Object
         })
         this.model = model('users', schema);
+    }
+
+    async getAll() {
+        const user = await this.model.find({}).lean();
+        return user.map(u => new UserDTO(u._id, u.email, u.name, u.lastname, u.edad, u.img, u.country, u.number, u.cartId));
     }
 
     // Save user in the database

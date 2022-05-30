@@ -1,10 +1,11 @@
 const { model, Schema } = require('mongoose');
 const faker = require('faker');
 const { normalize, schema } = require('normalizr');
+const BaseModel = require('./base.model');
 
-class Message {
+class Message extends BaseModel {
     constructor() {
-        const mensajeSchema = new Schema({
+        const schema = new Schema({
             author: {
                 email: String,
                 name: String,
@@ -13,7 +14,8 @@ class Message {
             },
             text: String
         });
-        this.model = model('mensajes', mensajeSchema);
+        
+        super('mensajes', schema);
     }
 
     async saveMsg(data) {

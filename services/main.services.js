@@ -1,6 +1,7 @@
 const moviesModel = require('../models/movie.model');
-const modelCart = require('../models/cart.model');
-const modelUser = require('../models/user.model');
+const ModelFactory = require('../models/model.factory');
+const modelCart = ModelFactory.getModel('cart');
+const modelUser = ModelFactory.getModel('user');
 
 module.exports = {
     async getAllMovies() {

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const logger = require('../log/winston');
+const BaseModel = require('./base.model');
 
-class Movie {
+class Movie extends BaseModel {
     constructor() {
         const schemma = new mongoose.Schema({
             title: String,
@@ -12,7 +13,7 @@ class Movie {
             id: Number,
         });
 
-        this.model = mongoose.model('movies', schemma);
+        super('movies', schemma);
     }
 
     async create(obj) {
@@ -27,22 +28,10 @@ class Movie {
         return movie;
     }
 
-    async getAll() {
-        logger.info('Peliculas y Series obtenidas correctamente');
-        let data = await this.model.find({});
-        return data;
-    }
-
     async getAllByTipo(tipo) {
         const tipoEnMayus = tipo.charAt(0).toUpperCase() + tipo.slice(1);
         logger.info(`${tipoEnMayus} obtenidas correctamente`);
         let data = await this.model.find({ tipo: tipo });
-        return data;
-    }
-
-    async getById(id) {
-        logger.info(`Pelicula con id: ${id} obtenida correctamente`);
-        let data = await this.model.find({ id: id });
         return data;
     }
 

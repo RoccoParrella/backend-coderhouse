@@ -1,4 +1,5 @@
-const cartModel = require('../models/cart.model');
+const ModelFactory = require('../models/model.factory');
+const cartModel = ModelFactory.getModel('cart');
 
 module.exports = {
     async getCartById(id) {

@@ -1,4 +1,4 @@
-module.exports = (async () => {
+module.exports = (async  () => {
         const express = require('express');
         const mongoose = require('mongoose');
         const app = express()
@@ -38,7 +38,7 @@ module.exports = (async () => {
             // ROUTES
             app.use('/', routerHome);
             app.use('/', routerLogin);
-
+            
             // APIS
             app.use('/api/user', apiUser);
             app.use('/api/cart', apiCart)
