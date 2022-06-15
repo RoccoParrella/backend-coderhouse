@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 const logger = require('../log/winston');
-const BaseModel = require('./base.model');
 
-class Movie extends BaseModel {
+class Movie{
     constructor() {
-        const schemma = new mongoose.Schema({
+        const schemma = new Schema({
             title: String,
             tipo: String,
             duration: String,
@@ -13,7 +12,7 @@ class Movie extends BaseModel {
             id: Number,
         });
 
-        super('movies', schemma);
+        this.model = model('movies', schemma);
     }
 
     async create(obj) {
@@ -23,9 +22,17 @@ class Movie extends BaseModel {
         } else {
             obj.id = await this.idProduct() + 1;
         }
-        const movie = await this.model.create({title: obj.titulo, tipo: obj.tipo, duration: obj.duracion, urlImg: obj.img});
-        logger.info(`Se ha agregado con exito ${obj.title} con el id N${obj.id}`);
+        const movie = await this.model.create({title: obj.titulo, tipo: obj.tipo, duration: obj.duracion, urlImg: obj.img, id: obj.id});
+        logger.info(`Se ha agregado con exito ${obj.titulo} con el id N${obj.id}`);
         return movie;
+    }
+
+    async getAll() {
+        return await this.model.find({});
+    } 
+
+    async getById(id) {
+        return await this.model.findOne({ id: id });
     }
 
     async getAllByTipo(tipo) {

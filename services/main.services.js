@@ -12,7 +12,22 @@ module.exports = {
         return await moviesModel.getAllByTipo(category);
     },
     async saveProducts(title, tipo, duration, urlImg) {
-        return await moviesModel.create(title, tipo, duration, urlImg)
+        const obj = {
+            titulo: title,
+            tipo: tipo,
+            duracion: duration,
+            img: urlImg
+        }
+        console.log(obj)
+        return await moviesModel.create(obj)
+       
+    },
+    async updateProduct(id, title, tipo, duration, urlImg) {
+        let obj = {title, tipo, duration, urlImg};
+        return await moviesModel.updateById(id, obj)
+    },
+    async deleteById(id) {
+        return await moviesModel.deleteById(id)
     },
     async createUser(obj) {
         return await modelUser.save(obj)

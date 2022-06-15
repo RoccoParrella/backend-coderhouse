@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+const { model, Schema } = require('mongoose');
 const moviesModel = require('../models/movie.model');
 
 class CartList {
     constructor() {
-        const schemma = new mongoose.Schema({
+        const schemma = new Schema({
             products: Array,
             userId: Object,
         });
-        this.model = mongoose.model('cartList', schemma);
+        this.model = model('cartList', schemma);
     }
 
     // Crea un carrito cuando el usuario se registra y lo asigna a su id
@@ -25,9 +25,9 @@ class CartList {
     // Agrega un producto al carrito de un usuario
 
     async addProduct(id, productId) {
-        let idProduct = parseInt(productId);
-        const product = await moviesModel.getById(idProduct);
-        await this.model.findByIdAndUpdate(id, { $push: { products: product[0] } });
+        const product = await moviesModel.getById(productId);
+        console.log(product, id);
+        await this.model.findByIdAndUpdate(id, { $push: { products: product } });
     }
 
     // Vacio el carro de un usuario
@@ -40,7 +40,7 @@ class CartList {
 
     async deleteProduct(id, productId) {
         let idProduct = parseInt(productId);
-        await this.model.updateOne({ id: id }, { $pull: { products: { id: idProduct } } });
+        await this.model.findByIdAndUpdate(id, { $pull: { products: { id: idProduct } } });
     }
 }
 

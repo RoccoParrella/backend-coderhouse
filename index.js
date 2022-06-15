@@ -21,6 +21,7 @@ module.exports = (async  () => {
         const apiCart = require('./routes/api/cart');
         const apiUser = require('./routes/api/user');
         const apiSend = require('./routes/api/sendMsg');
+        const apiProducts = require('./routes/api/product');
 
         mongoose.connect(config.MONGOURI).then(() => {
             initializePassport(passport)
@@ -43,6 +44,7 @@ module.exports = (async  () => {
             app.use('/api/user', apiUser);
             app.use('/api/cart', apiCart)
             app.use('/api/sms', apiSend)
+            app.use('/api/products', apiProducts)
 
         }).catch(err => {
             logger.error(err);

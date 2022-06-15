@@ -14,3 +14,7 @@
 2022-05-30T23:16:52.044Z [error] Error al autenticar el usuario: TypeError: userModel.existsByEmail is not a function
 2022-05-30T23:17:41.083Z [error] Error al autenticar el usuario: TypeError: userModel.existsByEmail is not a function
 2022-05-30T23:17:41.084Z [error] Error al autenticar el usuario: TypeError: userModel.existsByEmail is not a function
+2022-06-06T13:54:59.474Z [error] undefined
+2022-06-06T13:54:59.475Z [error] undefined
+2022-06-06T13:55:19.403Z [error] undefined
+2022-06-06T13:55:19.403Z [error] undefined
