@@ -26,7 +26,6 @@ class CartList {
 
     async addProduct(id, productId) {
         const product = await moviesModel.getById(productId);
-        console.log(product, id);
         await this.model.findByIdAndUpdate(id, { $push: { products: product } });
     }
 

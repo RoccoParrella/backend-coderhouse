@@ -2,7 +2,6 @@ module.exports = (async () => {
     const express = require('express');
     const mongoose = require('mongoose');
     const app = express()
-    const cors = require('cors');
     const server = require('http').Server(app)
     const path = require('path');
     const { Server } = require('socket.io');
@@ -12,7 +11,6 @@ module.exports = (async () => {
     const engine = require('./engines');
     const chat = require('./socket/index');
     const logger = require('./log/winston');
-    const applyGraphQL = require('./graphql');
 
     const passport = require('passport');
     const flash = require('express-flash');
@@ -28,20 +26,6 @@ module.exports = (async () => {
     mongoose.connect(config.MONGOURI).then(() => {
         initializePassport(passport)
         engine(app);
-
-        const corsCallback = (req, cb) => {
-            const origin = req.header('Origin')
-            const allowedHosts = ['http://localhost:3000', 'http://localhost:8080']
-
-            if (allowedHosts.includes(origin)) {
-                cb(null, { origin: true })
-            } else {
-                cb(null, { origin: false })
-            }
-        }
-        app.use(cors(corsCallback))
-
-        applyGraphQL(app);
 
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
