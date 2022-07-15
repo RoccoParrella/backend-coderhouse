@@ -17,13 +17,9 @@ module.exports = {
         const data = await mainServices.getByTipo(category);
         res.status(200).render('category', { data, category, user: req.user });
     },
-    getAdd: (req, res) => {
+    getChat: (req, res) => {
         logger.info('Un usuario ha accedido a la pagina de add');
         res.status(200).render('form', { user: req.user });
-    },
-    postAdd: async (req, res) => {
-        mainServices.saveProducts({ title: req.body.titulo, tipo: req.body.tipo, duration: req.body.duracion, urlImg: req.body.img });
-        res.status(201).redirect(`/result?movie=${req.body.titulo}`);
     },
     getResult: (req, res) => {
         logger.info('Un usuario ha accedido a la pagina de result');
@@ -42,5 +38,12 @@ module.exports = {
         const data = dataCompleta.products;
         logger.info('Un usuario ha accedido a la pagina de Confirmacion de compra');
         res.status(200).render('confirmCart', { data, user: req.user });
+    },
+    getChatEmail: async (req, res) => {
+        const { email } = req.params;
+        const data = await mainServices.chatByEmail(email);
+        logger.info('Un usuario ha accedido a la pagina de Chat By Email');
+        console.log(data);
+        res.status(200).render('chatByEmail', { data, user: req.user });
     }
 }

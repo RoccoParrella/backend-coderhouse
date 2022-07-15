@@ -4,51 +4,14 @@ block content
     main 
         div(class="main-form")
             div(class="contenedor margin-top")
-                p(class="title") Agregue una pelicula o serie 
-                form()
-                    div(class="form-label")
-                        label(for="titulo") Titulo
-                        input(id="titulo" ,name="titulo")
-                    div(class="form-label")
-                        label(for="tipo") Tipo
-                        select(id="tipo",name="tipo")
-                            option(value="peliculas") Pelicula
-                            option(value="series") Serie
-                    div(class="form-label")
-                        label(for="duracion") Duracion
-                        input(id="duracion",name="duracion")
-                    div(class="form-label")
-                        label(for="img") Imagen(URL)
-                        input(id="img",name="img")
-                    div
-                        button(id="enviar-pelis", class="boton",type="submit") Enviar
-            div(class="contenedor margin-top")
-                h2(class="title") Lista de contenido 
-                div(class="linea")
-                h2(class="h2 title", id="nadaPelis") NO HAY PELICULAS
-                div(class="d-flex justify-content-around", id="a")
-                    p(class="pelicula-t hidden" id="hidden-uno") Titulo
-                    p(class="pelicula-d hidden" id="hidden-dos") Duracion
-                    p(class="pelicula-m hidden" id="hidden-tres") Miniatura
-                div(class="peliculas-div" id="divPelis")
-                div(class="linea")
-            div(class="contenedor margin-top")
                 h2(class="title") Centro de mensajes
-                h3(class="title" id="compresion") -
                 div(class="linea")
                 h2(class="h2 title", id="nada") NO HAY MENSAJES
                 div(class="mensajes" id="divMensajes")
-                div(class="linea")
                 form(class="form-emails")
                     div(class="form-div")
                         div(class="form-label")
-                            input(class="input-emails", id="email", name="autor", class="mensaje-email", placeholder="Ingrese su email")
-                        div(class="form-label")
-                            input(class="input-emails", id="name", name="name", class="mensaje-email", placeholder="Ingrese su Nombre")
-                        div(class="form-label")
-                            input(class="input-emails", id="lastName", name="lastName", class="mensaje-email", placeholder="Ingrese su Apellido")
-                        div(class="form-label")
-                            input(class="input-emails", id="mensaje", name="mensaje", class="mensaje-emails", placeholder="Ingrese un mensaje")
+                            input(class="input-emails", id="mensaje", name="mensaje", placeholder="Ingrese un mensaje")
                     div
                         button(class="boton", id="boton-mail", type="submit") Enviar
 

@@ -2,6 +2,7 @@ const moviesModel = require('../models/movie.model');
 const ModelFactory = require('../models/model.factory');
 const modelCart = ModelFactory.getModel('cart');
 const modelUser = ModelFactory.getModel('user');
+const modelChat = require('../models/message.model');
 
 module.exports = {
     async getAllMovies() {
@@ -25,6 +26,10 @@ module.exports = {
     async updateProduct(id, title, tipo, duration, urlImg) {
         let obj = {title, tipo, duration, urlImg};
         return await moviesModel.updateById(id, obj)
+    },
+    async chatByEmail(email) {
+        const data = await modelChat.getMsgByEmail(email);
+        return data;
     },
     async deleteById(id) {
         return await moviesModel.deleteById(id)

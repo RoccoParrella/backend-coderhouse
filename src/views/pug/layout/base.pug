@@ -19,24 +19,28 @@ html
         link(
             rel="icon" 
             type="image/png" 
-            href="https://icon-library.com/images/netflix-icon-transparent/netflix-icon-transparent-29.jpg")
+            href="https://assets.nflxext.com/ffe/siteui/common/icons/nficon2016.ico")
+        title= "Netflix"
 
     body 
         nav.uk-navbar-container#nav(uk-navbar='')
             .uk-navbar-left
                 ul.uk-navbar-nav
+                    li 
+                        a(href="/")
+                            img(src="https://shop.diginet.pro//content/files/Diginet%20Images/BROAD%20Netflix/Netflix-DigiNet-Logo.png", class="logo-nav")
                     li.uk
-                        a(href='/') Home
-                    li
-                        a(href='/buscar?categoria=peliculas') Peliculas
+                        a(href='/', id="a-nav") Inicio
                     li  
-                        a(href='/buscar?categoria=series') Series
+                        a(href='/buscar?categoria=series', id="a-nav") Series
                     li
-                        a(href='/add') Add
+                        a(href='/buscar?categoria=peliculas', id="a-nav") Peliculas
+                    li
+                        a(href='/chat', id="a-nav") Chat
             .uk-navbar-right
                 ul.uk-navbar-nav
                     li
-                        a(href='/favorites') Favoritos
+                        a(href='/favorites', id="a-nav") Favoritos
                             span#cart-badge.uk-label 0
                     li 
                         a(href='/profile')

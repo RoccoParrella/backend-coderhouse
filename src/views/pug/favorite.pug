@@ -13,7 +13,7 @@ block content
                             img(class="foto-peliculas", src=pelicula.urlImg, alt="")
                             p(class="p-peliculas")= pelicula.title
                             p(class="p-duration")= pelicula.duration
-                            img(src="https://cdn-icons.flaticon.com/png/512/3687/premium/3687412.png?token=exp=1652915196~hmac=420af028d445f759deb95c506745c24e" class="logo-delete-favorite" onclick=`removeFromCart('${user.cartId}', '${pelicula.id}')`)
+                            img(src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Cross_red_circle.svg/1024px-Cross_red_circle.svg.png" class="logo-delete-favorite" onclick=`removeFromCart('${user.cartId}', '${pelicula.id}')`)
                     a(class="boton-comprar" href="/confirm") Concretar compra
                 
                 

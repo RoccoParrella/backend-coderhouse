@@ -143,11 +143,12 @@ main {
 }
 
 .contenedor {
-
     background-color: rgb(24, 24, 24);
     border-radius: 10px;
     box-shadow: 1px 1px 10px black;
     transition: .3s;
+    width: 60%;
+    margin: 40px auto;
 }
 
 .contenedor:hover {
@@ -352,8 +353,17 @@ span {
 .mensajes {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin: 0 29px;
+align-items: start;
+}
+
+.logo-nav{
+    width: 100px;
+    height: auto;
+    background-color: rgb(20, 20, 20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .linea {
@@ -365,7 +375,14 @@ span {
 }
 
 .input-emails {
-    width: 350px;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 20px;
+    transition: .3s;
 }
 
 .form-emails {
@@ -380,6 +397,7 @@ span {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .mensaje-autor {
@@ -398,9 +416,37 @@ span {
     width: auto;
 }
 
-.mensaje {
+.div-date{
+    width: auto;
+}
+
+.mensaje-derecha {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: auto;
+    align-items: start;
+    align-self: flex-end;
+    background-color: rgb(44, 44, 44);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 10px;
+    max-width: 500px;
+}
+
+.mensaje-izquierda{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: auto;
+    background-color: rgb(44, 44, 44);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 10px;
+    max-width: 400px;
+}
+
+.mensaje-date{
+    align-self: flex-end;
 }
 
 .hide {
@@ -416,6 +462,8 @@ span {
     display: flex;
     flex-direction: column;
 }
+
+
 
 .peliculas-form {
     margin: 10px 0;
@@ -479,6 +527,11 @@ span {
     padding: 0;
 }
 
+#a-nav{
+    font-family: Helvetica;
+    color:white;
+}
+
 #a {
     margin-right: 100px;
     margin-top: -8px;
@@ -516,12 +569,13 @@ span {
     height: 100vh;
     margin: 0;
     padding: 0;
+    background-image: url(https://assets.nflxext.com/ffe/siteui/vlv3/1ef84595-1fdb-4404-adac-15215ceeb3ae/db34337e-5f5d-4e1a-a6f9-cc1a441ce15e/AR-es-20220711-popsignuptwoweeks-perspective_alpha_website_large.jpg);
 }
 
 .contenedor-login {
     padding: 20px 30px;
     width: 400px;
-    background-color: white;
+    background-color: rgb(36, 36, 36);
     border-radius: 10px;
 }
 
@@ -545,8 +599,14 @@ span {
     font-size: 50px;
 }
 
+.h2-login{
+    color: white;
+    padding: 20px 0;
+}
+
 .form-group {
     margin: 10px 0;
+    padding: 5px 0;
 }
 
 .contenedor-bye {

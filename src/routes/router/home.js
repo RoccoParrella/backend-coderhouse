@@ -1,71 +1,21 @@
-// const { Router } = require("express");
-// const router = new Router();
-// const auth = require('../../middlewares/auth');
-// const { getHome, getSearch, getAdd, getResult, postAdd, getCart, getConfirm } = require('../../controllers/home.controller');
-const data = require('../../data/product.js');
-const Router = require('koa-router');
+const { Router } = require("express");
+const router = new Router();
+const auth = require('../../middlewares/auth');
+const { getHome, getSearch, getChat, getResult, getChatEmail , getCart, getConfirm } = require('../../controllers/home.controller');
 
-const router = new Router({
-    prefix: '/api'
-})
+router.get('/', auth, getHome);
 
-router.get ('/', (ctx) => {
-    ctx.body = JSON.stringify(data, null, 2);
-})
+router.get(`/buscar`, auth, getSearch)
 
-router.get ("/:id", (ctx) => {
-    const {id} = ctx.params;
-    const product = data.find((i) => i.id == id);
+router.get('/chat', auth, getChat)
 
-    if (!product) {
-        ctx.response.status = 404;
-        return
-    }
+router.get('/chat/:email', auth, getChatEmail)
 
-    ctx.body = JSON.stringify(product, null, 2);
-})
+router.get('/result', auth, getResult)
 
-router.post('/', (ctx) => {
+router.get('/favorites', auth, getCart)
 
-    const newProduct = ctx.request.body;
-    newProduct.id = data.length+1;
-    data.push(newProduct);
-
-    ctx.body = 'Producto agregado con exito';
-})
-
-router.delete('/:id', (ctx) => {
-    const {id} = ctx.params;
-    if(!id) {
-        ctx.body = 'No se ingreso un id';
-        return
-    }
-
-    const product = data.find((i) => i.id == id);
-
-    if (!product) {
-        ctx.body = 'No se encontro el producto';
-        return
-    }
-
-    const eliminatedProduct = data.filter((i) => i.id != id);
-    
-    ctx.body = eliminatedProduct;
-})
-
-// router.get('/', auth, getHome);
-
-// router.get(`/buscar`, auth, getSearch)
-
-// router.get('/add', auth, getAdd)
-
-// router.get('/result', auth, getResult)
-
-// router.get('/favorites', auth, getCart)
-
-// router.get('/confirm', auth, getConfirm)
-
-// router.post('/add', auth, postAdd)
+router.get('/confirm', auth, getConfirm)
 
 
 module.exports = router;

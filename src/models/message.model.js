@@ -1,19 +1,15 @@
 const { model, Schema } = require('mongoose');
-const faker = require('faker');
-const { normalize, schema } = require('normalizr');
 
-class Message{
+class Message {
     constructor() {
         const schema = new Schema({
-            author: {
-                email: String,
-                name: String,
-                lastName: String,
-                urlImg: { type: String, default: faker.image.people() }
-            },
-            text: String
+            email: String,
+            name: String,
+            lastname: String,
+            message: String,
+            date: String
         });
-        
+
         this.model = model('mensajes', schema);
     }
 
@@ -22,19 +18,13 @@ class Message{
     }
 
     async readMsg() {
-        const author = new schema.Entity('author', {}, { idAttribute: 'email' });
-        const mensaje = new schema.Entity('mensajes', {
-            author: author
-        });
-        const data = new schema.Entity('data', {
-            mensajes: [mensaje]
-        })
-        const mensajesEnDB = await this.model.find({});
-        const normalizedData = normalize({
-            id: "mensajes",
-            mensajes: mensajesEnDB
-        }, data);
-        return normalizedData
+        const data = await this.model.find();
+        return data;
     }
+
+    async getMsgByEmail(email) {
+        return await this.model.find({ email });
+    }
+
 }
 module.exports = new Message();
