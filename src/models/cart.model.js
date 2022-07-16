@@ -10,32 +10,32 @@ class CartList {
         this.model = model('cartList', schemma);
     }
 
-    // Crea un carrito cuando el usuario se registra y lo asigna a su id
+    // Create a cart when the user registers and assign it to his id
 
     async createCart() {
         return await this.model.create({ products: [] });
     }
 
-    // Trae el carrito de un usuario por su id
+    // Get cart by id
 
     async getCartById(id) {
         return await this.model.findById({ _id : id});
     }
 
-    // Agrega un producto al carrito de un usuario
+    // Add a product to a cart by user
 
     async addProduct(id, productId) {
         const product = await moviesModel.getById(productId);
         await this.model.findByIdAndUpdate(id, { $push: { products: product } });
     }
 
-    // Vacio el carro de un usuario
+    // Empty cart by user
 
     async emptyCart(id) {
         await this.model.findByIdAndUpdate(id , { $set: { products: [] } });
     }
 
-    // Borra un producto del carrito de un usuario
+    // Delete product from cart by user
 
     async deleteProduct(id, productId) {
         let idProduct = parseInt(productId);

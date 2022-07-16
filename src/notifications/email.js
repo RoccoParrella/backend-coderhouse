@@ -13,6 +13,8 @@ class MailSender {
         });
     }
 
+    // Function to send email to user when he registers
+
     async send(template, asunto, email) {
         const mailOptions = {
             subject: asunto,

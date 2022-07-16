@@ -7,21 +7,21 @@ module.exports = (passport) => {
     const authenticateUser = async (email, password, done) => {
         try {
 
-            // Busca el usuario por su email
+            // Search the user by his email
 
             if (!await mainServices.existsByEmail(email)) {
                 logger.error(`El email ${email} no esta registrado!`);
                 return done(null, false, { message: 'Usuario no registrado' });
             }
 
-            // Busca el usuario por su email lo comparo con la contraseña
+            // Search the user by his email and compare it with the password
         
             if (!await mainServices.isPasswordValid(email, password)) {
                 logger.warn(`El password no es validad!`);
                 return done(null, false, { message: 'Contraseña incorrecta' });
             }
 
-            // Si el usuario esta registrado y el password es valido, obtengo el usuario
+            // If the user is registered and the password is valid, get the user
 
             const user = await mainServices.getByEmail(email);
             done(null, user);
@@ -34,16 +34,19 @@ module.exports = (passport) => {
     const registerUser = async (req, email, password, done) => {
         const { name, lastname, pais, prefix, number, edad } = req.body
         try {
+
+            // Check if the user is already registered
+
             if (await mainServices.existsByEmail(email)) {
                 logger.error(`El email ${email} ya esta registrado!`);
                 return done(null, false, { message: 'Usuario ya registrado' })
             }
 
-            // Creo el el carrito
+            // Create the cart for the user
 
             const cart = await mainServices.createCart()
 
-            // Creo el usuario y le paso el id del carrito
+            // Create the user and save it in the DB with the cart id   
             
             const user = await mainServices.createUser({
                 email,
@@ -57,7 +60,7 @@ module.exports = (passport) => {
                 number: `${prefix}${number}`
             })
 
-            // Armo mi template de email
+            // Build the template for the email
 
             const template = `
                 <h1>Se ha registrado un nuevo usuario!</h1>
@@ -71,7 +74,7 @@ module.exports = (passport) => {
                 </ul>
             `
 
-            // Envio el email
+            // Send the email
 
             await senderServices.sendEmail(template, "nuevo registro", process.env.emailSender)
             done(null, user)

@@ -11,8 +11,8 @@ const updateCartBadge = async (parametro) => {
 }
 
 const addToCart = async (cartId, productId) => {
-    await updateCartBadge(1) 
-    await fetch(`/api/cart/${cartId}/${productId}`, { method: 'POST' }) 
+    await updateCartBadge(1)
+    await fetch(`/api/cart/${cartId}/${productId}`, { method: 'POST' })
 }
 
 const removeFromCart = async (cartId, productId) => {
@@ -23,5 +23,19 @@ const removeFromCart = async (cartId, productId) => {
 }
 
 const sendOrder = async (cartId) => {
-    fetch(`/api/sms/${cartId}`, { method: 'POST' })
+    Swal.fire({
+        title: 'Quieres confirmar el pedido?',
+        showDenyButton: true,
+        confirmButtonText: 'Confirmar!',
+        denyButtonText: `Cancelar`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/api/sms/${cartId}`, { method: 'POST' })
+            Swal.fire('Compra realizada con exito!', '', 'success')
+            setTimeout(() => window.location.href = '/',1000)
+        } else if (result.isDenied) {
+            Swal.fire('Compre rechazada', '', 'info')
+            setTimeout(() => window.location.href = '/',1000)
+        }
+    })
 }

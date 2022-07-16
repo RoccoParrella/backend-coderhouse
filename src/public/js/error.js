@@ -1,3 +1,3 @@
 setTimeout(() => {
-    location.replace("https://coderhouse-backend-netflix.herokuapp.com/signup");
+    window.location.href = "/signup"
 }, 2000)

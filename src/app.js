@@ -11,11 +11,12 @@ module.exports = (async () => {
     const engine = require('./engines');
     const chat = require('./socket/index');
     const logger = require('./log/winston');
-
     const passport = require('passport');
     const flash = require('express-flash');
     const initializePassport = require('./passport/local');
 
+
+    // Declare routes
     const routerHome = require('./routes/router/home');
     const routerLogin = require('./routes/router/login');
     const apiCart = require('./routes/api/cart');
@@ -23,9 +24,13 @@ module.exports = (async () => {
     const apiSend = require('./routes/api/sendMsg');
     const apiProducts = require('./routes/api/product');
 
+
+    // Connect to MongoDB
     mongoose.connect(config.MONGOURI).then(() => {
         initializePassport(passport)
         engine(app);
+
+        // Middleware
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
         app.use(flash());

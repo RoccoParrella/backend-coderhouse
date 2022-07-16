@@ -1,21 +1,26 @@
 const { Router } = require("express");
 const router = new Router();
 const auth = require('../../middlewares/auth');
-const { getHome, getSearch, getChat, getResult, getChatEmail , getCart, getConfirm } = require('../../controllers/home.controller');
+const { getHome, getSearch, getChat, getChatEmail , getCart } = require('../../controllers/home.controller');
+
+// Main page of the website
 
 router.get('/', auth, getHome);
 
+// Search by category 
+
 router.get(`/buscar`, auth, getSearch)
+
+// Chat page
 
 router.get('/chat', auth, getChat)
 
+// Search msg by email
+
 router.get('/chat/:email', auth, getChatEmail)
 
-router.get('/result', auth, getResult)
+// Cart page
 
 router.get('/favorites', auth, getCart)
-
-router.get('/confirm', auth, getConfirm)
-
 
 module.exports = router;
